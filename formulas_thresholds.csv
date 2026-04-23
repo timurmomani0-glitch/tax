@@ -1,0 +1,8 @@
+topic,formula_or_method,thresholds_rates,examiner_note
+Income Tax,Taxable income = Total income - Reliefs - Personal allowance,"PA taper: reduce £1 per £2 ANI above £100,000; PA nil at £125,140 (UK standard, confirm exam table)",For UK exams commonly fixed by tax tables
+Trading Profit,Adjusted profit = Accounts profit + disallowables - extra allowables,Add back depreciation; deduct capital allowances separately,Method marks for labelled adjustments
+Capital Allowances,Pool closing TWDV = Opening + Additions - Disposals - AIA/FYA - WDA,"WDA often Main 18%, Special 6% (confirm)",Cars/private use often single-asset treatment
+NIC,NIC liability = sum(rate x band slice by class),Use correct class thresholds/rates from table,Class identification first
+CGT,Gain = Proceeds - (Cost + Enhancement + Incidental costs) - Reliefs,AEA and rates from tax tables,Rate split uses remaining basic rate band
+Corporation Tax,CT = TTP x relevant CT rate (+/- marginal relief where applicable),Small profits/main limits divided by associated companies,Include FY split if AP spans FY
+VAT,Net VAT = Output tax - Recoverable input tax,Registration threshold and dereg threshold from table,Exempt vs zero-rated distinction crucial
