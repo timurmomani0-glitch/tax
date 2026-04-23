@@ -1,0 +1,10 @@
+topic,drill_question,what_examiner_wants,difficulty
+Income Tax,Compute full IT liability from mixed NSI/SI/DI with PA taper and PAYE credit.,"Build proforma, allocate PA, apply bands, deduct tax credits.",hard
+Employment,Calculate taxable employment income incl. car/fuel/loan benefits and allowable deductions.,Classify each item then value benefits by rule.,hard
+Trading,Adjust net profit for 15 listed items including private proportion and accrual adjustments.,Label add-backs/deductions with reasons.,medium
+Capital Allowances,"Prepare pool computations with AIA restriction, disposal, private-use asset.",Pool table + balancing adjustment where relevant.,hard
+Basis,Determine assessable profits for opening three tax years and cessation year incl. overlap.,Timeline then basis periods then overlap relief.,hard
+NIC,Compute Class 1 employee/employer NIC and Class 4 for sole trader.,Separate classes and apply correct thresholds.,medium
+CGT,"Compute net CGT with losses, AEA, and residential/non-residential rate split.",Per-disposal gains then annual netting and rates.,hard
+CT,Compute CT liability for AP spanning FY with associated company.,TTP then FY split and rates/marginal relief.,hard
+VAT,Compute VAT payable incl. exempt supplies impact and registration date test.,Output-input with recoverability adjustments.,medium

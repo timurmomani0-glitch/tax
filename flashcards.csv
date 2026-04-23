@@ -1,0 +1,13 @@
+topic,question,answer,difficulty
+Income Tax,What is the personal allowance taper rule?,"Reduce PA by £1 for every £2 ANI above £100,000 until nil at £125,140 (confirm exam table).",easy
+Income Tax,What is the first step in a full IT computation?,Build total income by source before reliefs and allowance allocation.,easy
+Employment,How are entertaining reimbursements treated for employees?,Potentially taxable unless specific exemption applies; do not assume exemption.,medium
+Trading,Why is depreciation added back?,It is not deductible for tax; relief comes via capital allowances.,easy
+Trading,When is legal expense deductible?,Only if revenue in nature and wholly/exclusively for trade.,medium
+Capital Allowances,What disposal value is used in pools?,Lower of proceeds and original cost (typically).,medium
+Basis,When is overlap relief normally used?,On cessation or on basis-period reform transition points per syllabus.,medium
+NIC,What is the biggest NIC exam trap?,Applying wrong class or wrong time basis thresholds.,easy
+CGT,How are CGT rates selected for individuals?,Use remaining basic-rate band first then higher rate for excess.,medium
+CT,What must be adjusted for associated companies?,Lower/upper CT limits for marginal relief calculations.,medium
+VAT,Difference between zero-rated and exempt supplies?,Zero-rated supplies taxable at 0% (input recoverable); exempt blocks input recovery.,easy
+VAT,What triggers compulsory registration?,Taxable turnover over registration threshold in statutory tests.,medium
