@@ -1,8 +1,32 @@
 topic,formula_or_method,thresholds_rates,examiner_note
-Income Tax,Taxable income = Total income - Reliefs - Personal allowance,"PA taper: reduce £1 per £2 ANI above £100,000; PA nil at £125,140 (UK standard, confirm exam table)",For UK exams commonly fixed by tax tables
-Trading Profit,Adjusted profit = Accounts profit + disallowables - extra allowables,Add back depreciation; deduct capital allowances separately,Method marks for labelled adjustments
-Capital Allowances,Pool closing TWDV = Opening + Additions - Disposals - AIA/FYA - WDA,"WDA often Main 18%, Special 6% (confirm)",Cars/private use often single-asset treatment
-NIC,NIC liability = sum(rate x band slice by class),Use correct class thresholds/rates from table,Class identification first
-CGT,Gain = Proceeds - (Cost + Enhancement + Incidental costs) - Reliefs,AEA and rates from tax tables,Rate split uses remaining basic rate band
-Corporation Tax,CT = TTP x relevant CT rate (+/- marginal relief where applicable),Small profits/main limits divided by associated companies,Include FY split if AP spans FY
-VAT,Net VAT = Output tax - Recoverable input tax,Registration threshold and dereg threshold from table,Exempt vs zero-rated distinction crucial
+Income Tax,"Taxable income = Total income - Reliefs - PA; bands NSI then SI then DI","[TAX TABLE] PA £12,570; taper £1 per £2 ANI>£100,000; nil at £125,140; BR band £37,700; rates 20/40/45",Allocate PA to NSI first; PSA and DA are 0% bands not deductions
+Income Tax - Savings,"Starting rate £5k @ 0% only if NSI < £17,570; then PSA","[TAX TABLE] PSA: £1,000 BR / £500 HR / £0 AR",Compute SR band only after NSI allocation
+Income Tax - Dividends,"Dividend allowance inside band; then 8.75/33.75/39.35","[TAX TABLE] DA £500",DA uses up band space even at 0%
+Tax Reducers,"Deduct after tax calculated on taxable income","VCT 30%; EIS 30%; SEIS 50%; MCA at fixed %",Restricted to tax liability; cannot create repayment
+HICBC,"Clawback 1% per £200 above £60k ANI","Full clawback at £80k",Addition to IT not a band
+Employment - Car,"(List price - contribs capped £5k) x CO2% x months/12 - PU payments","CO2 % per tax table; diesel +4% cap 37% unless RDE2",Time-apportion for availability gaps >=30 consecutive days
+Employment - Fuel,"Fixed fuel charge x CO2% (all-or-nothing)","[TAX TABLE] fixed charge",No reduction for partial reimbursement
+Employment - Loan,"Benefit = avg balance x ORI - interest paid","Exempt if total loans <= £10,000 throughout year",Average method default; strict if elected
+Employment - Accommodation,"AV + (cost - £75,000) x ORI if cost > £75k",Ancillary services capped 10% of net earnings,Cost includes improvements pre-start
+Trading Profit,"Accounts profit + disallowables - extra allowables - CA",Add back PCCFEL + depreciation + general provisions,Label every line with rule/reason
+Capital Allowances,"AIA first (special pool first) then FYA then WDA (18/6) then balancing","AIA £1m time-apportioned; WDA time-apportioned",Private-use restriction on allowance line only
+CA - Cars,"Depends on CO2 emissions","0 g/km FYA100% new; <=50 main; >50 special",Never AIA on cars
+CA - SBA,"3% straight-line on qualifying non-residential building cost","[TAX TABLE] 3% annual",Not on land
+Basis of Assessment,"Tax year basis: profits arising 6 Apr - 5 Apr",Apportion AP by days or months (state basis),Deduct overlap b/f on cessation
+NIC - Class 1 EE,"(earnings - PT) x main; excess above UEL x 2%","[TAX TABLE] PT/UEL and rates",Directors: annual earnings period
+NIC - Class 1 ER,"(earnings - ST) x secondary; no upper cap","[TAX TABLE] ST and rate",Employment Allowance £5k - eligibility test
+NIC - Class 4,"(profits - LPL) x main; excess above UPL x 2%","[TAX TABLE] LPL/UPL",Sole traders only
+CGT,"Gain = Proceeds - (cost + enhancement + incidentals) - reliefs","AEA £3,000; residential 18/24; other 10/20; BADR 10% up to £1m",CY losses mandatory; AEA against highest-rate gains
+CGT - Chattels,"If P <= £6k and C <= £6k exempt; if P > £6k and C <= £6k gain = min(actual, 5/3 x (P-6k))","£6,000 threshold",Loss with P < £6k: use deemed proceeds £6k
+CGT - PPR,"Relief = gain x (qualifying period / total period)","Final 9 months deemed qualifying",Deemed occupation rules if sandwiched by actual occupation
+CGT - BADR,"Rate 10% on qualifying disposals","£1m lifetime cap; 2-year holding; >=5% shares + officer/employee",Separate rate track
+Corporation Tax,"TTP = Trading + Property + NTLR + Gains - QCDs","[TAX TABLE] Small 19%; Main 25%; MR fraction 3/200 (FY23+)",Augmented profits = TTP + non-51% group divs
+CT - Limits,"£50,000 / £250,000 divided by (assoc cos + 1) then x AP/12","Adjust BOTH limits",Long accounts split into two APs
+CT - Marginal Relief,"MR = 3/200 x (Upper - Augmented) x (TTP/Augmented)","Only between adjusted limits",Deduct from 25% x TTP
+VAT,"Net VAT = Output - Recoverable input","[TAX TABLE] Register >£90k rolling 12m or future 30d; dereg £88k",Zero-rated <> Exempt; exempt blocks input
+VAT - Blocked Input,"Client entertaining; car any PU; non-business; director accom","No partial recovery on blocked items",Staff entertaining allowed unless incidental to client
+VAT - Partial Exemption De Minimis,"Recover all if exempt input <= £625/month AND <= 50% of total input","Monthly and annual tests",Fails if either limit breached
+Admin,"Online filing 31 Jan; paper 31 Oct","POA 31 Jan + 31 Jul if prior IT+Cl4 > £1k and >20% uncollected",Interest runs from due date
+Penalties - Late Filing,"£100 -> £10/day (max 90) -> 5% or £300 at 6m -> 5% or £300 at 12m","Tiered","Deliberate uplift if applicable"
+Penalties - Late Payment,"5% at 30d / 5% at 6m / 5% at 12m","Plus interest","Separate from filing penalties"
+Ethics,"POPIC principles; MLR 2017 SAR to MLRO","Evasion illegal; avoidance may be GAAR/DOTAS","Disengage if client refuses disclosure"
