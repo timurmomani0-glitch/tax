@@ -1,0 +1,12 @@
+topic,trap_question,correct_answer,why_students_miss
+Capital Allowances,"Sole trader buys car used 70% for business: how much AIA?","£0 - AIA is never available on cars (use WDA by CO2 band; single-asset pool with 70% restriction on allowance).",Students confuse plant-and-machinery rules with car rules.
+Income Tax,"ANI £130k - what is the PA?","£0 - fully tapered (PA nil at £125,140).",Students deduct a partial PA.
+VAT,"Client entertaining at a dinner that includes staff - any input recovery?","Recover only the proportion attributable to staff; client portion blocked (if staff are mere incidental hosts to client entertaining the whole supply is blocked).",Students claim the whole input.
+NIC,"Director paid monthly - use monthly earnings period?","No - directors use an annual earnings period regardless of pay frequency.",Students apply monthly thresholds.
+CT,"Dividend received from 80% subsidiary - included in augmented profits?","No - excluded (51%+ group).",Students include it and mis-size augmented profits.
+CA,"Second-hand electric (zero-emission) car - FYA 100%?","No - FYA 100% requires a NEW zero-emission car. Second-hand goes to main pool (normally).",Students grant FYA on any EV.
+CGT,"Chattels: proceeds £7,500; cost £3,000. Gain?","min(actual 4,500, 5/3 x (7,500 - 6,000) = 2,500) -> gain £2,500.",Students use the unrestricted £4,500.
+CGT,"Residential property sold; residual BR band £15k of £37,700 available; gain £50k after AEA. Rate split?","£15k at 18% + £35k at 24%.",Students use 10%/20% or apply all at 24%.
+VAT,"Two-month roll-forward forecast > £90k - when to register?","Register immediately (future 30-day test); effective from the start of that 30-day window.",Students wait for the historic test to trigger.
+Trading,"Sole trader's own salary £30k charged in accounts: adjust?","Add back (disallowable - drawings are not an expense).",Students leave it in.
+CGT,"Used BADR; b/f capital losses £10k; should you set against BADR gains?","No - allocate losses and AEA against highest-rate gains first (saves 20/24% rather than 10%).",Students mis-allocate losses/AEA against BADR.

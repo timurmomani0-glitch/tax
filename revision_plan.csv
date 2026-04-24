@@ -1,11 +1,26 @@
-period,focus
-Day 1,Income tax engine + employment income; 2 timed Qs; error log
-Day 2,Trading adjustments + capital allowances; 3 drills + 1 timed section
-Day 3,CGT full topic + losses/reliefs traps; 2 timed Qs
-Day 4,Corporation tax + VAT mechanics; 2 integrated questions
-Day 5,Basis periods + NIC + admin dates; rapid-fire short questions
-Day 6,Full mock 1 under exam timing; forensic review and rewrite weak answers
-Day 7,Full mock 2 + memorize one-page sheet + final weak-area drills
-Emergency D-3,Tier 1 topics only; memorize proformas and rates; one mini-mock
-Emergency D-2,Past-paper high-frequency questions; correction-first revision
-Emergency D-1,No new content; one-page sheet x3 reviews + light confidence drills
+period,focus,deliverable
+Day 1 AM,IT engine - build full proforma x3 under time pressure,Three timed IT computations marked against own criteria
+Day 1 PM,Employment income - benefits schedule drills (2 Qs),Two schedules with labelled exemptions
+Day 1 Eve,Flashcards 1-10 + one-page sheet read-through,Flashcard accuracy >=90%
+Day 2 AM,Trading adjustments x2 full Qs,Labelled add-backs/deductions with reasons
+Day 2 PM,Capital allowances - pool drills x2 incl. AIA-to-special,Pool tables with WDA and private-use restriction
+Day 2 Eve,Flashcards 11-20 + error log first pass,Error log written
+Day 3 AM,CGT - gain builds + reliefs (PPR + BADR + chattels),Per-asset tables + rate split working
+Day 3 PM,CGT drill paper under time,Full CGT question timed and marked
+Day 3 Eve,Flashcards 21-25 + one-page sheet,Recall complete
+Day 4 AM,CT - AP + associated companies + MR formula,TTP to liability under time
+Day 4 PM,VAT - registration + partial exemption + blocks,VAT Q timed
+Day 4 Eve,One-page sheet 3x + integrated scenarios,Full integration drill
+Day 5 AM,NIC + Admin + Ethics rapid-fire,All cheap-mark categories covered
+Day 5 PM,Error-log rework - rewrite two weakest answers,Rewrites completed
+Day 5 Eve,Trap questions and 'why wrong' drills,Traps table mastered
+Day 6 AM,Full mock 1 under exam timing (closed book tax table only),Complete paper submitted
+Day 6 PM,Forensic review of mock 1 - rewrite weak answers,Rewrites and lessons added to error log
+Day 6 Eve,Light drills on weak areas identified,Confidence consolidation
+Day 7 AM,Full mock 2 under exam timing,Paper submitted
+Day 7 PM,Final error-log pass + one-page sheet memorisation,Sheet memorised verbatim
+Day 7 Eve,Light drills only; sleep at normal time,Rest
+Emergency D-3,Tier 1 only: IT + Trading+CA + CGT; mini-mock (half paper),Half-paper completed
+Emergency D-2,High-frequency Qs from past papers; correction-first revision,Corrections documented
+Emergency D-1,No new content; one-page sheet x3; light confidence drills only,Sheet memorised
+24h Checklist,One-page sheet x3 recites; verify tax-table rates you will cite; walk through each template; pack materials; no new topics; no all-nighter,Readiness confirmed

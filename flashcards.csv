@@ -1,13 +1,43 @@
 topic,question,answer,difficulty
-Income Tax,What is the personal allowance taper rule?,"Reduce PA by £1 for every £2 ANI above £100,000 until nil at £125,140 (confirm exam table).",easy
-Income Tax,What is the first step in a full IT computation?,Build total income by source before reliefs and allowance allocation.,easy
-Employment,How are entertaining reimbursements treated for employees?,Potentially taxable unless specific exemption applies; do not assume exemption.,medium
-Trading,Why is depreciation added back?,It is not deductible for tax; relief comes via capital allowances.,easy
-Trading,When is legal expense deductible?,Only if revenue in nature and wholly/exclusively for trade.,medium
-Capital Allowances,What disposal value is used in pools?,Lower of proceeds and original cost (typically).,medium
-Basis,When is overlap relief normally used?,On cessation or on basis-period reform transition points per syllabus.,medium
-NIC,What is the biggest NIC exam trap?,Applying wrong class or wrong time basis thresholds.,easy
-CGT,How are CGT rates selected for individuals?,Use remaining basic-rate band first then higher rate for excess.,medium
-CT,What must be adjusted for associated companies?,Lower/upper CT limits for marginal relief calculations.,medium
-VAT,Difference between zero-rated and exempt supplies?,Zero-rated supplies taxable at 0% (input recoverable); exempt blocks input recovery.,easy
-VAT,What triggers compulsory registration?,Taxable turnover over registration threshold in statutory tests.,medium
+Income Tax,What is the PA taper rule?,"PA reduced by £1 for every £2 of ANI above £100,000; PA = £0 at £125,140 [TAX TABLE].",easy
+Income Tax,In what order is income taxed within bands?,NSI first then SI then DI.,easy
+Income Tax,When is the starting rate for savings available?,"Only if NSI taxable is below £17,570; then up to £5,000 of savings taxed at 0%.",medium
+Income Tax,What are the PSA amounts?,"£1,000 for BR / £500 for HR / £0 for AR taxpayers [TAX TABLE].",easy
+Income Tax,What is the dividend allowance for 2024/25?,"£500 at 0% [TAX TABLE]; still uses band space.",easy
+Income Tax,What is HICBC?,"High Income Child Benefit Charge; 1% per £200 ANI above £60,000; full clawback £80,000 [TAX TABLE].",medium
+Income Tax,How does Marriage Allowance work?,"Transfer 10% of PA (£1,260) if transferor is non-taxpayer and receiver is BR taxpayer.",medium
+Employment,How is a company car benefit computed?,"(List price - capital contrib capped £5,000) x CO2% x months available / 12 - employee private-use payments.",medium
+Employment,When is a benefit exempt for a mobile phone?,"One mobile phone provided to the employee is exempt.",easy
+Employment,Trivial benefit limit?,"Exempt if <=£50 each; not cash; not contractual; cap £300/year for director close companies.",medium
+Employment,How is fuel benefit reduced for partial reimbursement?,"It is not reduced unless the employee fully reimburses all private fuel; otherwise the full fuel charge applies.",hard
+Trading,Why add back depreciation?,"Not deductible for tax; relief is given via capital allowances.",easy
+Trading,Is staff entertaining allowable?,"Yes - only customer entertaining is disallowable.",medium
+Trading,Legal fees on long lease acquisition (>50y)?,"Capital; disallow.",medium
+Trading,When is a gift to a customer allowable?,"<=£50 per person per year AND carries advert AND not food/drink/tobacco/vouchers.",medium
+Capital Allowances,AIA allocation priority?,"Allocate to special-rate pool first (6%) then main (18%) to maximise relief.",medium
+Capital Allowances,Are cars eligible for AIA?,"No - never. Use WDA by CO2 band; FYA only for new zero-emission cars.",easy
+Capital Allowances,Pool disposal value?,"Lower of proceeds and original cost.",medium
+Capital Allowances,When can a balancing allowance arise on the main pool?,"Only on cessation of the trade (excluding small-pool WDA rule).",hard
+Basis,Current basis of assessment?,"Tax year basis: profits arising 6 April - 5 April; apportion AP as needed.",medium
+Basis,Overlap relief?,"Deducted on cessation under tax year basis rules (or on transition).",medium
+NIC,Class 4 upper rate?,"2% on profits above UPL [TAX TABLE].",easy
+NIC,When is Employment Allowance NOT available?,"Single-director company with no other employee paid above ST; or Cl1 secondary >£100k previous year.",hard
+CGT,How are CY and b/f losses used?,"CY losses first (mandatory even if below AEA); b/f losses only to reduce gains down to AEA.",medium
+CGT,AEA for 2024/25?,"£3,000 [TAX TABLE].",easy
+CGT,Residential property rates from 2024/25?,"18% (BR) / 24% (HR).",medium
+CGT,BADR rate and cap?,"10% on qualifying gains up to £1m lifetime; 2-year qualifying period.",medium
+CGT,Chattels 5/3 rule?,"If proceeds > £6,000 and cost <= £6,000 then gain = min(actual, 5/3 x (proceeds - £6,000)).",hard
+CGT,PPR final-period exemption?,"Final 9 months always qualifying.",medium
+CT,How are CT limits adjusted for associated companies?,"Divide both £50k and £250k by (n+1) and time-apportion for AP length (x AP/12).",medium
+CT,Marginal relief formula?,"3/200 x (Upper - Augmented) x (TTP/Augmented) [TAX TABLE for fraction].",hard
+CT,Augmented profits?,"TTP plus dividends from non-51%-group companies.",medium
+CT,CT payment due date (non-large)?,"9 months + 1 day after end of AP.",easy
+VAT,Compulsory registration tests?,"Historic: rolling 12-month turnover > £90k -> register within 30 days of month-end; Future: next 30 days alone > £90k -> register immediately [TAX TABLE].",medium
+VAT,Zero-rated vs exempt?,"Zero-rated: taxable at 0%; input VAT recoverable. Exempt: outside the system; input VAT not recoverable.",easy
+VAT,Blocked input VAT?,"Client entertaining; cars with any private use; non-business expenditure; director accommodation.",medium
+VAT,Partial exemption de minimis?,"Recover all input if exempt-related input <= £625/month AND <= 50% of total input.",hard
+Admin,Online SA filing deadline?,"31 January following the tax year.",easy
+Admin,POA due dates and trigger?,"31 Jan + 31 Jul; triggered if prior IT+Cl4 > £1,000 and >20% uncollected at source.",medium
+Admin,Late payment penalties?,"5% at 30 days / 5% at 6 months / 5% at 12 months + interest from due date.",medium
+Ethics,Five fundamental principles?,"Integrity; Objectivity; Professional competence & due care; Confidentiality; Professional behaviour (POPIC).",easy
+Ethics,What to do if client refuses to disclose evasion?,"Consider disengaging and submit a SAR to the MLRO (or NCA) under MLR 2017.",medium

@@ -1,155 +1,291 @@
-# Principles of Taxation — Marks-Maximization Study System (Ruthless Examiner Audit Edition)
+# Principles of Taxation — Marks-Maximisation Study System
 
-## OUTPUT 1 — Materials Map
-- Files found and parsed: `README.md`, `EXAM_STUDY_SYSTEM.md`.
-- Python-generated extraction index: `topic_index.csv`.
-- Confidence: **Medium-Low** (no past papers/model answers/tutorial packs in repo; pattern analysis inferred from standard UK Principles of Taxation exam design).
+> Rate/threshold values flagged **[TAX TABLE]** depend on the year-specific tax
+> table supplied in the exam. Read them off the table; never guess.
 
-### Topic-to-material coverage snapshot
-| Topic | README.md | Existing guide | Confidence |
-|---|---:|---:|---|
-| Income Tax | 0 | 30 | High |
-| Employment Income | 0 | 22 | High |
-| Trading Profit Adjustments | 0 | 23 | High |
-| Capital Allowances | 0 | 26 | High |
-| Basis of Assessment | 0 | 17 | High |
-| NIC | 0 | 22 | High |
-| CGT | 0 | 18 | High |
-| Corporation Tax | 0 | 12 | High |
-| VAT | 0 | 43 | High |
+---
 
-## OUTPUT 2 — Examinable Topic Inventory
-1. Income tax computation architecture (income categories, PA mechanics, band allocation, tax reducers/credits).
-2. Employment income (cash earnings, benefits valuation, exemptions, allowable deductions).
-3. Trading profit adjustments (wholly & exclusively, capital/revenue split, accrual/prepayment/provisions treatment).
-4. Capital allowances (AIA/FYA/WDA, pools, disposals, balancing adjustments, private-use handling).
-5. Basis of assessment (opening years, current-year basis, change of accounting date, cessation, overlap relief).
-6. NIC (Class 1/2/4 computational method by threshold slices).
-7. CGT (gain build-up, losses, AEA, reliefs, rates and band interaction).
-8. Corporation tax (TTP composition, associated-company effects, FY/apportionment logic).
-9. VAT (registration tests, output/input tax, recoverability restrictions, schemes/tax point).
+## 0. Materials used & confidence
 
-## OUTPUT 3 — Exam Strategy Overview
-- Highest-yield order: **Income Tax -> Trading+CA -> CGT -> CT -> VAT -> Basis/NIC**.
-- Easiest marks: proforma order, clear labelling of adjustments, tax-table rate insertion, final reconciliation line.
-- Dangerous topics: basis periods, associated company CT limits, VAT exempt vs zero-rated, NIC class mismatch.
-- Revision time: 35% computation engines, 25% past-paper simulation, 20% weak-area rework, 20% memorization + active recall.
-- Exam time allocation (per 100 marks): 1.8 minutes/mark baseline, reserve last 12 minutes for check/reconciliation.
+| Source | Status | Weight |
+|---|---|---|
+| Past exam papers | Not in repo | — |
+| Model answers (highest priority) | Not in repo | — |
+| Lecture slides | Not in repo | — |
+| Tutorial Qs/As | Not in repo | — |
+| Revision lectures | Not in repo | — |
+| Prior scaffolding (this file + CSVs) | In repo | Medium |
 
-## OUTPUT 4 — Examiner Blueprint (what earns/loses marks)
-### Income Tax
-- Examiner tests: classification accuracy + statutory order + arithmetic discipline.
-- High-mark minimum: proforma, rule statement, computation line, conclusion line.
-- Mark-losing mistakes: omitted step, unlabeled adjustment, wrong rate source, no final liability statement.
-- Timed checklist: classify -> state rule -> compute -> reconcile -> conclude.
-### Employment Income
-- Examiner tests: classification accuracy + statutory order + arithmetic discipline.
-- High-mark minimum: proforma, rule statement, computation line, conclusion line.
-- Mark-losing mistakes: omitted step, unlabeled adjustment, wrong rate source, no final liability statement.
-- Timed checklist: classify -> state rule -> compute -> reconcile -> conclude.
-### Trading Profit Adjustments
-- Examiner tests: classification accuracy + statutory order + arithmetic discipline.
-- High-mark minimum: proforma, rule statement, computation line, conclusion line.
-- Mark-losing mistakes: omitted step, unlabeled adjustment, wrong rate source, no final liability statement.
-- Timed checklist: classify -> state rule -> compute -> reconcile -> conclude.
-### Capital Allowances
-- Examiner tests: classification accuracy + statutory order + arithmetic discipline.
-- High-mark minimum: proforma, rule statement, computation line, conclusion line.
-- Mark-losing mistakes: omitted step, unlabeled adjustment, wrong rate source, no final liability statement.
-- Timed checklist: classify -> state rule -> compute -> reconcile -> conclude.
-### Basis of Assessment
-- Examiner tests: classification accuracy + statutory order + arithmetic discipline.
-- High-mark minimum: proforma, rule statement, computation line, conclusion line.
-- Mark-losing mistakes: omitted step, unlabeled adjustment, wrong rate source, no final liability statement.
-- Timed checklist: classify -> state rule -> compute -> reconcile -> conclude.
-### NIC
-- Examiner tests: classification accuracy + statutory order + arithmetic discipline.
-- High-mark minimum: proforma, rule statement, computation line, conclusion line.
-- Mark-losing mistakes: omitted step, unlabeled adjustment, wrong rate source, no final liability statement.
-- Timed checklist: classify -> state rule -> compute -> reconcile -> conclude.
-### CGT
-- Examiner tests: classification accuracy + statutory order + arithmetic discipline.
-- High-mark minimum: proforma, rule statement, computation line, conclusion line.
-- Mark-losing mistakes: omitted step, unlabeled adjustment, wrong rate source, no final liability statement.
-- Timed checklist: classify -> state rule -> compute -> reconcile -> conclude.
-### Corporation Tax
-- Examiner tests: classification accuracy + statutory order + arithmetic discipline.
-- High-mark minimum: proforma, rule statement, computation line, conclusion line.
-- Mark-losing mistakes: omitted step, unlabeled adjustment, wrong rate source, no final liability statement.
-- Timed checklist: classify -> state rule -> compute -> reconcile -> conclude.
-### VAT
-- Examiner tests: classification accuracy + statutory order + arithmetic discipline.
-- High-mark minimum: proforma, rule statement, computation line, conclusion line.
-- Mark-losing mistakes: omitted step, unlabeled adjustment, wrong rate source, no final liability statement.
-- Timed checklist: classify -> state rule -> compute -> reconcile -> conclude.
+Syllabus coverage assumed: UK "Principles of Taxation" (ICAEW CFAB / ACA style,
+with overlap into ACCA TX-UK). If past papers are added to the repo, re-run for
+paper-specific calibration.
 
-## OUTPUT 5 — Master Study Guide (tightened after ruthless audit)
-### Income Tax (frequently examined)
-- Must-memorize: full computation order; PA taper trigger and endpoint; NSI/SI/DI allocation order.
-- Must-understand: why allocation order changes marginal rate result.
-- Common trap: calculating tax before subtracting reliefs/allowances correctly.
-- Worked template: Total income -> Net income -> Less PA -> Tax by band -> Less credits -> Balance due.
-### Trading + Capital Allowances (frequently examined)
-- Must-memorize: add-back list (depreciation, capital, private, non-trade entertaining), CA pool sequence.
-- Must-understand: accounting profit is starting point, never final taxable amount.
-- Common trap: deducting capital expenditure directly instead of through CA.
-### CGT (frequently examined)
-- Must-memorize: gain build formula and annual netting order.
-- Must-understand: rate depends on remaining basic-rate band and asset type rules in syllabus.
-- Common trap: missing incidental disposal costs or loss offset ordering.
-### CT, VAT, Basis, NIC (frequently/occasionally)
-- CT: build TTP before rates; adjust limits for associated companies.
-- VAT: taxable vs exempt distinction drives input recovery; registration timing is examinable method marks.
-- Basis: timeline first, then basis periods, then overlap relief.
-- NIC: class identification precedes computation.
+---
 
-## OUTPUT 6 — Perfect Answer Templates
-1. **Income tax**: Source table -> reliefs -> PA -> band split -> rates -> credits -> final liability.
-2. **Employment**: Item list -> taxable/exempt tag -> valuation rule -> subtotal employment income.
-3. **Trading adjustments**: PBT -> add-backs with reasons -> deductions with reasons -> adjusted trading profit.
-4. **Capital allowances**: pool table (opening, additions, disposals, AIA/FYA/WDA, closing).
-5. **Basis**: tax-year timeline + basis-period table + overlap line.
-6. **NIC**: class-by-class threshold slices and totals.
-7. **CGT**: per-disposal gain table -> annual netting -> AEA -> rate split.
-8. **CT**: TTP bridge -> FY/rate application -> liability.
-9. **VAT**: registration test -> output/input schedule -> payable/repayable.
+## A. Exam strategy overview
 
-## OUTPUT 7 — Revision Notes by Priority
-- **Tier 1**: Income tax, trading adjustments, capital allowances, CGT.
-- **Tier 2**: Corporation tax, VAT.
-- **Tier 3**: Basis-period edge cases, NIC edge thresholds, niche relief exceptions.
+- **Highest-yield order:** Income Tax → Trading + CA → CGT → CT → VAT → Basis / NIC / Admin / Ethics.
+- **Easiest marks:** proforma headers, column discipline, "£0 — exempt" lines,
+  self-assessment dates, VAT registration triggers, ethics principle naming.
+- **Most dangerous:** band allocation with mixed NSI/SI/DI + PA taper;
+  associated-company CT limits; VAT exempt vs zero-rated; CGT rate split
+  across residential vs other assets; basis cessation with overlap.
+- **Revision split (two weeks):** 35% computation drills, 25% timed mocks,
+  20% error-log rework, 10% memorisation, 10% NIC/admin/ethics.
+- **Exam time budget:** 1.8 min/mark (includes planning) — reserve the last
+  10–12 minutes for final sweep (conclusion lines, W references, rate cites,
+  tax-table numbers verbatim).
 
-## OUTPUT 8 — Active Recall Pack
-- Generated files: `flashcards.csv` and `drill_questions.csv` (regenerated after audit to remove vagueness, add examiner intent).
+---
 
-## OUTPUT 9 — Mock Exam System
-- Generated file: `revision_plan.csv` containing 7-day plan, 3-day emergency cram sequence, and last-day protocol.
+## B. Examiner blueprint per topic
 
-## OUTPUT 10 — Performance Diagnostic
-- 20% content driving ~80% marks: computation order + adjustment logic + rate/band allocation + clear proformas.
-- Why students miss 70+: incomplete workings, skipped method steps, weak time control, formula-memory without execution structure.
-- Behaviours for top-band: write rule sentence before each adjustment, show every intermediate subtotal, finish each question with explicit liability conclusion.
+For each topic: what is tested / what must appear / where marks leak / fast
+checklist / wording that scores.
 
-## OUTPUT 11 — Ultra-High-Yield Version (last-minute)
-- Memorize five engines: IT, Trading, CA, CGT, VAT/CT bridge.
-- Drill only high-frequency templates under time pressure.
-- Use one-page sheet 3x repetition cycle (morning/afternoon/night).
+### B1. Income Tax Computation
 
-## OUTPUT 12 — One-Page Memorisation Sheet
-- Generated file: `one_page_memorize.md`.
+- **Testing:** correct columnar layout (NSI | SI | DI | Total); PA & taper; PSA;
+  dividend allowance; tax reducers vs deductions; HICBC; marriage allowance.
+- **Must appear:** proforma, ANI check, PA line, NSI→SI→DI allocation,
+  reducer line, conclusion with due date.
+- **Mark leaks:** applying PSA/DA as deductions; wrong taper direction;
+  forgetting PA is £0 at £125,140; no tax-reducer restriction note.
+- **Fast checklist:** columns → net income → PA (+ taper) → taxable →
+  bands (SR/PSA/DA inside bands) → rates → − reducers → − PAYE → conclude.
+- **Wording:** "PA reduced by £1 for every £2 of ANI above £100,000." /
+  "Dividend allowance of £500 at 0%." / "Tax reducer restricted to liability —
+  cannot create a repayment."
 
-## OUTPUT 13 — Python-generated files
-- `topic_index.csv`
-- `formulas_thresholds.csv`
-- `flashcards.csv` (regenerated after audit)
-- `drill_questions.csv` (regenerated after audit)
-- `revision_plan.csv`
-- `one_page_memorize.md`
+### B2. Employment Income
 
-## Self-audit (explicit)
-- Covered all major topics? **Yes** (9 core modules listed).
-- Included rates/threshold/formulas? **Yes, where extractable; flagged tax-table dependency due to missing official year tables**.
-- Exact answer methods shown? **Yes (template sequence for each major computation).**
-- Understanding vs exam execution distinguished? **Yes (must-understand vs must-memorize + method marks).**
-- Organized by expected mark value? **Yes (Tier 1/2/3 and revision allocation).**
-- Timed usability? **Yes (question checklists + revision_plan.csv).**
+- **Testing:** benefit classification, exemption list, valuation rules.
+- **Must appear:** salary + bonus + benefits table with rules; "£0 exempt" lines.
+- **Mark leaks:** cost-to-employer on cars; missing ≥30-day availability
+  apportionment; no capital-contribution £5k cap; fuel benefit reduced for
+  partial reimbursement (it's not).
+- **Fast checklist:** list item → exempt? cite exemption → valuation rule →
+  time-apportion → less employee contribution → sum.
+- **Wording:** "Taxable benefit = (list price − capital contrib, capped £5,000)
+  × CO₂% × months available / 12 − payments for private use."
+
+### B3. Trading Profit Adjustments
+
+- **Testing:** W&E test, capital vs revenue, statutory disallowables, private use.
+- **Must appear:** net profit → labelled add-backs → labelled deductions →
+  less CA → adjusted trading profit.
+- **Mark leaks:** no reason labels; adding back staff entertaining (allowable);
+  deducting sole trader's own "salary"; forgetting to strip non-trading income.
+- **Wording:** "Add back — not wholly and exclusively for trade." /
+  "Deduct — taxable elsewhere as NTLR / property income."
+
+### B4. Capital Allowances
+
+- **Testing:** AIA allocation, main/special pools, WDA, single-asset (PU),
+  balancing adjustments, SBA, cars by CO₂.
+- **Must appear:** columnar pool table — Main | Special | Single-asset | Allowance.
+- **Mark leaks:** AIA on cars (never); AIA to main before special; disposal
+  at proceeds (use lower of proceeds & cost); balancing allowance on pool mid-life.
+- **Fast checklist:** pool table → additions → AIA (special first) → FYA →
+  disposals (lower of) → WDA (time-apportion) → balancing → PU restrict at
+  allowance line → total.
+- **Wording:** "AIA allocated to special-rate pool first to maximise relief
+  (6% < 18%)." / "Disposal value taken as the lower of proceeds and original cost."
+
+### B5. Basis of Assessment (tax-year basis)
+
+- **Testing:** which profits fall in which tax year; cessation with overlap b/f.
+- **Must appear:** timeline of APs against 6 April lines; apportionment; overlap
+  deduction on cessation.
+- **Wording:** "Trading profits assessed on the tax-year basis (6 April–5 April),
+  apportioning the accounting period results where necessary."
+
+### B6. NIC
+
+- **Testing:** correct class and threshold slicing.
+- **Must appear:** class label → rate slices → totals; employment allowance if
+  applicable.
+- **Mark leaks:** mixing PT and ST; forgetting 2% upper tier (Cl1 EE, Cl4);
+  employment allowance used where ineligible (single-director co).
+- **Wording:** "Class 1 primary: (earnings − PT) × main rate to UEL; excess × 2%."
+
+### B7. CGT
+
+- **Testing:** per-disposal gain, loss ordering, AEA, rate split, reliefs.
+- **Must appear:** per-asset table → CY losses → b/f losses (to AEA) → AEA to
+  highest-rate gains → remaining BR band → rate split → conclusion + dates.
+- **Mark leaks:** b/f losses before CY; AEA against BADR (leave BADR until
+  after allocation); residential rate on shares.
+- **Wording:** "Current-year losses offset in full before AEA." / "AEA
+  allocated against gains attracting the highest rate to minimise the liability."
+
+### B8. Corporation Tax
+
+- **Testing:** TTP, augmented profits, associated companies, marginal relief,
+  FY split.
+- **Must appear:** TTP build; augmented profits; limits ÷ (n+1) × AP/12;
+  classify; rate; MR; liability + due date.
+- **Mark leaks:** adjusting only one limit; including 51%+ group dividends
+  in augmented profits; forgetting long AP splits into two APs.
+- **Wording:** "Augmented profits compared to upper/lower limits, which are
+  divided by the number of associated companies and time-apportioned for the
+  AP length." / "Marginal relief = 3/200 × (upper − augmented) × (TTP/augmented)."
+
+### B9. VAT
+
+- **Testing:** supply classification, registration, input blocks, partial
+  exemption, tax point, schemes, bad debt, errors.
+- **Must appear:** classification → registration tests → output VAT → input
+  VAT (blocks) → PE → net payable/repayable.
+- **Mark leaks:** treating exempt as zero-rated; claiming on client
+  entertaining; claiming on a car with any private use; missing future-30-day
+  test; mis-stating effective registration date.
+- **Wording:** "Compulsory registration within 30 days of the end of the
+  month in which the rolling 12-month threshold was exceeded; effective first
+  day of the following month." / "Input VAT on client entertaining is blocked."
+
+### B10. Admin, Payments, Penalties
+
+- Dates, interest and % penalties are pure recall marks.
+- **Wording:** "Balancing payment and first POA due 31 January following the
+  tax year; second POA due 31 July."
+
+### B11. Ethics
+
+- **Testing:** identify fundamental principle and action.
+- **Wording:** "Under the principle of integrity, we advise disclosure to HMRC;
+  if refused, consider disengaging and, where suspicion exists, submit a SAR
+  to the MLRO under MLR 2017."
+
+---
+
+## C. Master study guide
+
+Full rules, proformas, mini-examples, traps and memory hooks are in the chat
+output (long form). The compressed exam-usable versions are kept on the
+one-page sheet and in the compressed version below.
+
+Each topic answers four lenses: **Rule → Application under time → Exact
+mistake that loses marks → Wording that earns the mark.**
+
+---
+
+## D. Perfect answer templates (sequence + wording)
+
+1. **Income Tax:** NSI/SI/DI columns → reliefs → PA (+ taper) → bands (SR/PSA
+   /DA carve-outs inside) → rates → − reducers → − PAYE → "IT payable £X".
+2. **Employment:** salary/bonus (receipts) → benefits table (rule | valuation
+   | time apportion | contrib) → deductions → subtotal.
+3. **Trading:** net profit → add-backs (labelled) → deductions (labelled) →
+   − CA (W) → adjusted profit.
+4. **Capital Allowances:** pool table (Main | Special | Single-asset |
+   Allowance) with AIA-to-special-first and lower-of disposal rule.
+5. **Basis:** timeline → apportionment → overlap on cessation.
+6. **NIC:** class → threshold slices × rate → totals (+ EA if eligible).
+7. **CGT:** per-disposal table → CY losses → b/f losses → AEA (to highest-rate)
+   → remaining BR band → rate split → liability + 60-day note for residential.
+8. **CT:** TTP → augmented → adjusted limits → classify → rate/MR → liability
+   + 9m+1d due date.
+9. **VAT:** classify → registration tests (historic + future) → output VAT →
+   input VAT (with blocks) → PE (de minimis) → net payable.
+
+---
+
+## E. Priority ranking
+
+- **Tier 1 (must master):** Income Tax, Trading, CA, CGT — ~55% of marks.
+- **Tier 2 (important):** CT, VAT, Employment benefits, NIC — ~30%.
+- **Tier 3 (low probability, cheap):** Admin dates/penalties, Ethics, Property
+  (finance restriction, rent-a-room), Basis edge cases — ~15%.
+
+---
+
+## F. Active recall system
+
+Generated files:
+
+- `flashcards.csv` — 25 Q/A cards covering all engines.
+- `drill_questions.csv` — 9 timed calculation drills with examiner intent.
+- `trap_questions.csv` — 7 classic exam pitfalls.
+
+Also practise the "Why is this wrong?" list in the long-form output.
+
+---
+
+## G. Mock exam system
+
+- `revision_plan.csv` — 7-day plan, 3-day emergency plan, 24-hour protocol.
+- Progression: single-topic drills → cross-topic → full-paper closed-book.
+- Hand-write final mocks to mirror exam stamina and timing.
+
+---
+
+## H. Performance diagnostic
+
+**20% content delivering 80% of marks:**
+
+1. IT proforma with NSI→SI→DI and PA taper.
+2. Trading add-backs list with reasons.
+3. CA pool table with AIA-to-special and WDA rules.
+4. CGT rate-split using remaining BR band with AEA against highest-rate.
+5. VAT blocked-input list + registration triggers.
+6. CT limit adjustment for associated companies + AP length + MR formula.
+
+**Why students miss 70+:** no proforma, no rule labels, no intermediate
+subtotals, no conclusion sentence, poor time control, mis-read tax tables.
+
+**Top-band skills:** write proforma headers before numbers; include one "£0 —
+exempt" line per exemption; write a one-sentence rule next to non-obvious
+treatment; close every question with an explicit liability conclusion and
+due date.
+
+---
+
+## Ultra-high-yield compressed version
+
+**Five engines to memorise (order, not numbers):**
+
+1. **IT:** Total → Net → − PA (taper) → Taxable → NSI/SI/DI → Rates →
+   − Reducers → − PAYE → Payable.
+2. **Trading:** Net profit + add-backs (P-C-C-F-E-L) − deductions − CA.
+3. **CA:** Pool table; AIA to Special first; WDA 18/6; BA only cessation
+   (pool) / disposal (single-asset); PU at allowance line.
+4. **CGT:** Per-asset → − CY losses → − b/f (to AEA) → − AEA (to highest-rate)
+   → remaining BR band → rate split.
+5. **CT:** TTP − QCD; + non-group div → Augmented; limits ÷ (n+1) × AP/12;
+   19% / 25%; MR = 3/200 × (U−A) × (TTP/A).
+
+**VAT (bonus engine):** Classify → Register (hist 12m / future 30d > [TAX
+TABLE]) → Output − Input (blocks) → PE de minimis → Net → File 1m+7d.
+
+**Exam discipline (non-negotiable):**
+
+- Proforma header before numbers.
+- Label every line with rule/reason.
+- "£0 — exempt" lines explicit.
+- Subtotal at every major stage.
+- Rate cited in brackets beside computation.
+- Conclude with "£X liability, due DD/MM/YYYY".
+
+---
+
+## One-page memorisation sheet
+
+See `one_page_memorize.md` (updated).
+
+---
+
+## Self-audit
+
+- Covered all major topics? **Yes** (IT, Employment, Trading, CA, Basis,
+  NIC, CGT, CT, VAT, Admin, Ethics, Property basics).
+- Rates/thresholds? **Rules stated; year-specific values flagged [TAX TABLE]**
+  — do not memorise without checking the exam's own table.
+- Exam-execution vs understanding? **Both lenses on each topic.**
+- Mark-winning wording included? **Yes — wording banks per topic.**
+- Organised by expected mark value? **Yes — Tier 1/2/3 mapping.**
+- Usable under exam conditions? **Yes — proformas + one-page sheet + 24h
+  checklist.**
+- Residual weaknesses: without past papers, topic weightings are industry-
+  typical rather than paper-specific; add papers to repo and re-run for
+  calibration.
