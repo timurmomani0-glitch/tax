@@ -56,6 +56,16 @@ git add -A && git commit -m "Update site" && git push
 # GitHub → Settings → Pages → Build from branch: main, folder /docs
 ```
 
+### Deploying from a different repo (e.g. the course fork `timurmomani/tax`)
+
+Copy the project files (`portfolio.py`, `pipelines/`, `data/`, `analysis_R/`,
+`docs/`, `requirements.txt`, `.env.example`, this README) into the fork. The site
+loads its data from the `RAW_BASE` URL at the top of `portfolio.py`, which points at
+this repo — that keeps working from any host while this repo is public. To make the
+fork fully self-contained instead, change that one line to the fork's raw URL
+(e.g. `https://raw.githubusercontent.com/timurmomani/tax/main/data/`), re-run the
+export command above, and push.
+
 ## Python ↔ R agreement check
 
 `pipeline_4_merge.py` (statsmodels) Model 4 on Provider B: **ESGscore = 0.0026\*\***
