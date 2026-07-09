@@ -1,0 +1,282 @@
+{
+  "main": {
+    "Model 1": {
+      "terms": {
+        "Intercept": {
+          "coef": 2.1937,
+          "se": 0.0593,
+          "p": 0.0,
+          "stars": "***"
+        },
+        "ESGscore": {
+          "coef": -0.004,
+          "se": 0.001,
+          "p": 0.0001,
+          "stars": "***"
+        }
+      },
+      "n": 7895,
+      "r2": 0.002,
+      "industry_fe": false,
+      "year_fe": false
+    },
+    "Model 2": {
+      "terms": {
+        "Intercept": {
+          "coef": 7.5725,
+          "se": 0.1254,
+          "p": 0.0,
+          "stars": "***"
+        },
+        "ESGscore": {
+          "coef": 0.0173,
+          "se": 0.001,
+          "p": 0.0,
+          "stars": "***"
+        },
+        "Firm_Size": {
+          "coef": -0.6626,
+          "se": 0.014,
+          "p": 0.0,
+          "stars": "***"
+        },
+        "Leverage": {
+          "coef": 0.0088,
+          "se": 0.0035,
+          "p": 0.0109,
+          "stars": "**"
+        }
+      },
+      "n": 7895,
+      "r2": 0.222,
+      "industry_fe": false,
+      "year_fe": false
+    },
+    "Model 3": {
+      "terms": {
+        "Intercept": {
+          "coef": 5.3061,
+          "se": 0.6321,
+          "p": 0.0,
+          "stars": "***"
+        },
+        "ESGscore": {
+          "coef": 0.0113,
+          "se": 0.001,
+          "p": 0.0,
+          "stars": "***"
+        },
+        "Firm_Size": {
+          "coef": -0.4819,
+          "se": 0.0189,
+          "p": 0.0,
+          "stars": "***"
+        },
+        "Leverage": {
+          "coef": 0.012,
+          "se": 0.0031,
+          "p": 0.0001,
+          "stars": "***"
+        }
+      },
+      "n": 7895,
+      "r2": 0.485,
+      "industry_fe": true,
+      "year_fe": false
+    },
+    "Model 4": {
+      "terms": {
+        "Intercept": {
+          "coef": 5.8416,
+          "se": 0.7251,
+          "p": 0.0,
+          "stars": "***"
+        },
+        "ESGscore": {
+          "coef": 0.0026,
+          "se": 0.0012,
+          "p": 0.024,
+          "stars": "**"
+        },
+        "Firm_Size": {
+          "coef": -0.5135,
+          "se": 0.0183,
+          "p": 0.0,
+          "stars": "***"
+        },
+        "Leverage": {
+          "coef": 0.0091,
+          "se": 0.003,
+          "p": 0.0022,
+          "stars": "***"
+        }
+      },
+      "n": 7895,
+      "r2": 0.525,
+      "industry_fe": true,
+      "year_fe": true
+    }
+  },
+  "robustness": {
+    "Main (Provider B)": {
+      "terms": {
+        "Intercept": {
+          "coef": 5.8416,
+          "se": 0.7251,
+          "p": 0.0,
+          "stars": "***"
+        },
+        "ESGscore": {
+          "coef": 0.0026,
+          "se": 0.0012,
+          "p": 0.024,
+          "stars": "**"
+        },
+        "Firm_Size": {
+          "coef": -0.5135,
+          "se": 0.0183,
+          "p": 0.0,
+          "stars": "***"
+        },
+        "Leverage": {
+          "coef": 0.0091,
+          "se": 0.003,
+          "p": 0.0022,
+          "stars": "***"
+        }
+      },
+      "n": 7895,
+      "r2": 0.525,
+      "industry_fe": true,
+      "year_fe": true
+    },
+    "Alt. ESG (Provider A)": {
+      "terms": {
+        "Intercept": {
+          "coef": 9.0202,
+          "se": 1.2769,
+          "p": 0.0,
+          "stars": "***"
+        },
+        "ESGscore": {
+          "coef": -0.044,
+          "se": 0.0165,
+          "p": 0.0079,
+          "stars": "***"
+        },
+        "Firm_Size": {
+          "coef": -0.6135,
+          "se": 0.0687,
+          "p": 0.0,
+          "stars": "***"
+        },
+        "Leverage": {
+          "coef": 0.0175,
+          "se": 0.011,
+          "p": 0.1123,
+          "stars": ""
+        }
+      },
+      "n": 954,
+      "r2": 0.619,
+      "industry_fe": true,
+      "year_fe": true
+    },
+    "Large firms": {
+      "terms": {
+        "Intercept": {
+          "coef": 3.6169,
+          "se": 0.9801,
+          "p": 0.0002,
+          "stars": "***"
+        },
+        "ESGscore": {
+          "coef": 0.0004,
+          "se": 0.0012,
+          "p": 0.7635,
+          "stars": ""
+        },
+        "Firm_Size": {
+          "coef": -0.1111,
+          "se": 0.0218,
+          "p": 0.0,
+          "stars": "***"
+        },
+        "Leverage": {
+          "coef": 0.0042,
+          "se": 0.0028,
+          "p": 0.1318,
+          "stars": ""
+        }
+      },
+      "n": 3947,
+      "r2": 0.556,
+      "industry_fe": true,
+      "year_fe": true
+    },
+    "2010-2019": {
+      "terms": {
+        "Intercept": {
+          "coef": 5.6327,
+          "se": 1.1626,
+          "p": 0.0,
+          "stars": "***"
+        },
+        "ESGscore": {
+          "coef": -0.0001,
+          "se": 0.0015,
+          "p": 0.9682,
+          "stars": ""
+        },
+        "Firm_Size": {
+          "coef": -0.5624,
+          "se": 0.0227,
+          "p": 0.0,
+          "stars": "***"
+        },
+        "Leverage": {
+          "coef": 0.0084,
+          "se": 0.0037,
+          "p": 0.0232,
+          "stars": "**"
+        }
+      },
+      "n": 4013,
+      "r2": 0.577,
+      "industry_fe": true,
+      "year_fe": true
+    },
+    "Winsorised 1/99%": {
+      "terms": {
+        "Intercept": {
+          "coef": 5.5698,
+          "se": 0.6166,
+          "p": 0.0,
+          "stars": "***"
+        },
+        "ESGscore": {
+          "coef": 0.0023,
+          "se": 0.001,
+          "p": 0.0213,
+          "stars": "**"
+        },
+        "Firm_Size": {
+          "coef": -0.4718,
+          "se": 0.0156,
+          "p": 0.0,
+          "stars": "***"
+        },
+        "Leverage": {
+          "coef": 0.0501,
+          "se": 0.0088,
+          "p": 0.0,
+          "stars": "***"
+        }
+      },
+      "n": 7895,
+      "r2": 0.58,
+      "industry_fe": true,
+      "year_fe": true
+    }
+  }
+}

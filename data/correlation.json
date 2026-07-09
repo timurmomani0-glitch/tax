@@ -1,0 +1,26 @@
+{
+  "q~ESGscore": {
+    "r": -0.043,
+    "stars": "***"
+  },
+  "q~Firm_Size": {
+    "r": -0.439,
+    "stars": "***"
+  },
+  "q~Leverage": {
+    "r": 0.007,
+    "stars": ""
+  },
+  "ESGscore~Firm_Size": {
+    "r": 0.442,
+    "stars": "***"
+  },
+  "ESGscore~Leverage": {
+    "r": 0.059,
+    "stars": "***"
+  },
+  "Firm_Size~Leverage": {
+    "r": 0.056,
+    "stars": "***"
+  }
+}

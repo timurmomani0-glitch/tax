@@ -1,0 +1,17 @@
+# Secrets — never commit
+.env
+*.env
+!.env.example
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# marimo / uv caches
+.marimo/
+__marimo__/
+
+# OS
+.DS_Store

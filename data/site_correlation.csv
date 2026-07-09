@@ -1,0 +1,7 @@
+pair,r,stars
+q~ESGscore,-0.043,***
+q~Firm_Size,-0.439,***
+q~Leverage,0.007,
+ESGscore~Firm_Size,0.442,***
+ESGscore~Leverage,0.059,***
+Firm_Size~Leverage,0.056,***

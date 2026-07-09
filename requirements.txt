@@ -1,0 +1,23 @@
+# Layer A (offline pipelines) + export tooling. Layer B deps live in portfolio.py's
+# PEP 723 header (marimo, pandas, plotly) and install via micropip in the browser.
+pandas>=2.2
+numpy
+polars>=1.0
+pyarrow
+statsmodels
+scipy
+pyreadr
+requests
+beautifulsoup4
+python-dotenv
+groq
+yfinance>=0.2.66
+nltk>=3.9
+wordcloud
+matplotlib
+marimo>=0.19.10
+plotly>=6.0
+altair>=5.0
+# Optional (Week 10 GPU track — see notebooks_colab/wordclouds_gpu_colab.ipynb):
+# spacy, spacy-transformers, spacy-curated-transformers>=0.3.1, cupy-cuda12x,
+# en_core_web_trf wheel from explosion/spacy-models releases
