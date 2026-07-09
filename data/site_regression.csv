@@ -1,0 +1,35 @@
+group,model,term,coef,se,p,stars,n,r2,industry_fe,year_fe
+main,Model 1,Intercept,2.1937,0.0593,0.0,***,7895,0.002,False,False
+main,Model 1,ESGscore,-0.004,0.001,0.0001,***,7895,0.002,False,False
+main,Model 2,Intercept,7.5725,0.1254,0.0,***,7895,0.222,False,False
+main,Model 2,ESGscore,0.0173,0.001,0.0,***,7895,0.222,False,False
+main,Model 2,Firm_Size,-0.6626,0.014,0.0,***,7895,0.222,False,False
+main,Model 2,Leverage,0.0088,0.0035,0.0109,**,7895,0.222,False,False
+main,Model 3,Intercept,5.3061,0.6321,0.0,***,7895,0.485,True,False
+main,Model 3,ESGscore,0.0113,0.001,0.0,***,7895,0.485,True,False
+main,Model 3,Firm_Size,-0.4819,0.0189,0.0,***,7895,0.485,True,False
+main,Model 3,Leverage,0.012,0.0031,0.0001,***,7895,0.485,True,False
+main,Model 4,Intercept,5.8416,0.7251,0.0,***,7895,0.525,True,True
+main,Model 4,ESGscore,0.0026,0.0012,0.024,**,7895,0.525,True,True
+main,Model 4,Firm_Size,-0.5135,0.0183,0.0,***,7895,0.525,True,True
+main,Model 4,Leverage,0.0091,0.003,0.0022,***,7895,0.525,True,True
+robustness,Main (Provider B),Intercept,5.8416,0.7251,0.0,***,7895,0.525,True,True
+robustness,Main (Provider B),ESGscore,0.0026,0.0012,0.024,**,7895,0.525,True,True
+robustness,Main (Provider B),Firm_Size,-0.5135,0.0183,0.0,***,7895,0.525,True,True
+robustness,Main (Provider B),Leverage,0.0091,0.003,0.0022,***,7895,0.525,True,True
+robustness,Alt. ESG (Provider A),Intercept,9.0202,1.2769,0.0,***,954,0.619,True,True
+robustness,Alt. ESG (Provider A),ESGscore,-0.044,0.0165,0.0079,***,954,0.619,True,True
+robustness,Alt. ESG (Provider A),Firm_Size,-0.6135,0.0687,0.0,***,954,0.619,True,True
+robustness,Alt. ESG (Provider A),Leverage,0.0175,0.011,0.1123,,954,0.619,True,True
+robustness,Large firms,Intercept,3.6169,0.9801,0.0002,***,3947,0.556,True,True
+robustness,Large firms,ESGscore,0.0004,0.0012,0.7635,,3947,0.556,True,True
+robustness,Large firms,Firm_Size,-0.1111,0.0218,0.0,***,3947,0.556,True,True
+robustness,Large firms,Leverage,0.0042,0.0028,0.1318,,3947,0.556,True,True
+robustness,2010-2019,Intercept,5.6327,1.1626,0.0,***,4013,0.577,True,True
+robustness,2010-2019,ESGscore,-0.0001,0.0015,0.9682,,4013,0.577,True,True
+robustness,2010-2019,Firm_Size,-0.5624,0.0227,0.0,***,4013,0.577,True,True
+robustness,2010-2019,Leverage,0.0084,0.0037,0.0232,**,4013,0.577,True,True
+robustness,Winsorised 1/99%,Intercept,5.5698,0.6166,0.0,***,7895,0.58,True,True
+robustness,Winsorised 1/99%,ESGscore,0.0023,0.001,0.0213,**,7895,0.58,True,True
+robustness,Winsorised 1/99%,Firm_Size,-0.4718,0.0156,0.0,***,7895,0.58,True,True
+robustness,Winsorised 1/99%,Leverage,0.0501,0.0088,0.0,***,7895,0.58,True,True
