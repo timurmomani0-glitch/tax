@@ -60,14 +60,15 @@ def list_10k_filings(cik):
     filings = []
 
     def collect(block):
-        for form, accession, primary_doc, filing_date in zip(
+        for form, accession, primary_doc, filing_date, report_date in zip(
             block["form"], block["accessionNumber"],
             block["primaryDocument"], block["filingDate"],
+            block.get("reportDate", [""] * len(block["form"])),
         ):
             if form == "10-K":
                 filings.append({
                     "accession": accession, "primary_doc": primary_doc,
-                    "date": filing_date,
+                    "date": filing_date, "report_date": report_date,
                 })
 
     collect(data["filings"]["recent"])
@@ -79,27 +80,51 @@ def list_10k_filings(cik):
 
 
 def extract_risk_factors(html_bytes):
-    """Item 1A text between the start and end regexes (course extraction)."""
+    """Item 1A text between the start and end regexes.
+
+    Improvement over the course notebook's first-match approach: 10-K primary
+    documents mention "Item 1A ... Risk Factors" first in the table of contents,
+    so taking the FIRST match sweeps the whole "Item 1. Business" section into
+    the extract. Every start candidate is considered instead, and candidates that
+    contain ANOTHER "Item 1A ... Risk Factors" header inside them (the signature
+    of a TOC sweep) are rejected; among the genuine, properly-bounded sections
+    the longest wins (later "see Item 1A" cross-references are short).
+    """
     soup = BeautifulSoup(html_bytes, "html.parser")
     text = soup.get_text(separator=" ", strip=True)
     text = re.sub(r"\s+", " ", text)
 
-    start = START_PAT.search(text)
-    if not start:
-        return None
-    tail = text[start.start():]
-    end = END_PAT.search(tail, pos=200)  # skip the section header itself
-    if end:
-        return tail[:end.start()].strip()
-    return tail[:80_000].strip()  # safety cap when no end marker found
+    bounded, unbounded = [], []
+    for m in START_PAT.finditer(text):
+        tail = text[m.start():]
+        end = END_PAT.search(tail, pos=200)  # skip the section header itself
+        cand = tail[:end.start()].strip() if end else tail[:80_000].strip()
+        nested = START_PAT.search(cand, pos=200) is not None  # TOC sweep signature
+        (bounded if end else unbounded).append((cand, nested))
+
+    for pool in (bounded, unbounded):
+        clean = [c for c, nested in pool if not nested]
+        if clean:
+            return max(clean, key=len)
+        if pool:
+            return max((c for c, _ in pool), key=len)
+    return None
 
 
 def fetch_item_1a(cik, filings, target_year):
-    """Best 10-K for the target filing year (accepts year or year+1, course rule)."""
-    for filing in filings:
-        filing_year = int(filing["date"][:4])
-        if filing_year not in (target_year, target_year + 1):
-            continue
+    """Best 10-K for the target FISCAL year.
+
+    Filings whose report period (reportDate) falls in the target year are tried
+    first — fiscal-year accurate for non-December filers like AAPL (Sep FYE) and
+    MSFT (Jun FYE), whose fiscal-N 10-K is filed in calendar year N so the course
+    filing-date window would pick the year-N+1 (= fiscal N+1) filing instead.
+    The course window (filing year in {target, target+1}) remains as a fallback.
+    """
+    primary = [f for f in filings if f.get("report_date", "")[:4] == str(target_year)]
+    fallback = [f for f in filings
+                if f not in primary
+                and int(f["date"][:4]) in (target_year, target_year + 1)]
+    for filing in primary + fallback:
         accession_clean = filing["accession"].replace("-", "")
         doc_url = (f"https://www.sec.gov/Archives/edgar/data/"
                    f"{int(cik)}/{accession_clean}/{filing['primary_doc']}")
@@ -109,7 +134,8 @@ def fetch_item_1a(cik, filings, target_year):
         if result and len(result) > 500:
             return result
         print(f"    extracted only {len(result) if result else 0} chars from "
-              f"{filing['date']}, trying next filing")
+              f"{filing['date']} (period {filing.get('report_date', '?')}), "
+              f"trying next filing")
     return None
 
 

@@ -48,6 +48,30 @@ def test_edgar_extraction_readable_text():
     assert "Unresolved Staff Comments" not in text
 
 
+def test_edgar_extraction_skips_table_of_contents():
+    # Real 10-Ks list "Item 1A. Risk Factors" in the TOC first; a first-match
+    # extractor sweeps the whole "Item 1. Business" section into the extract.
+    body = ("Consumer demand may decline. Competition is intense. "
+            "Regulatory scrutiny is increasing. " * 30)
+    html = (
+        "<html><body>"
+        "<p>TABLE OF CONTENTS</p>"
+        "<p>Item 1. Business 3</p><p>Item 1A. Risk Factors 15</p>"
+        "<p>Item 1B. Unresolved Staff Comments 40</p><p>Item 2. Properties 41</p>"
+        "<p>Item 1. Business</p>"
+        "<p>" + "We design, manufacture and market smartphones. " * 40 + "</p>"
+        "<p>Item 1A. Risk Factors</p>"
+        "<p>" + body + "</p>"
+        "<p>Item 1B. Unresolved Staff Comments</p><p>None.</p>"
+        "</body></html>"
+    ).encode()
+    text = extract_risk_factors(html)
+    assert text is not None
+    assert "Consumer demand may decline" in text
+    assert "manufacture and market smartphones" not in text, \
+        "extractor swept the Business section (TOC first-match bug)"
+
+
 def test_llm_json_parsing_with_fences_and_gaps():
     raw = """```json
     {"sentences": [{"index": 1, "sentiment": "positive", "rationale": "growth"},
