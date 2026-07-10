@@ -14,10 +14,6 @@
         "count": 11
       },
       {
-        "phrase": "apple table",
-        "count": 10
-      },
-      {
         "phrase": "stock price",
         "count": 9
       },
@@ -79,6 +75,10 @@
       },
       {
         "phrase": "material adverse",
+        "count": 5
+      },
+      {
+        "phrase": "exchange rate",
         "count": 5
       }
     ],
@@ -354,10 +354,6 @@
         "count": 12
       },
       {
-        "phrase": "content alphabet",
-        "count": 11
-      },
-      {
         "phrase": "board director",
         "count": 11
       },
@@ -368,10 +364,6 @@
       {
         "phrase": "retain",
         "count": 8
-      },
-      {
-        "phrase": "google network",
-        "count": 7
       },
       {
         "phrase": "network member",
@@ -412,6 +404,14 @@
       {
         "phrase": "trade price",
         "count": 5
+      },
+      {
+        "phrase": "revenue generate",
+        "count": 5
+      },
+      {
+        "phrase": "change practice",
+        "count": 5
       }
     ],
     "2025": [
@@ -426,10 +426,6 @@
       {
         "phrase": "harm financial",
         "count": 20
-      },
-      {
-        "phrase": "content alphabet",
-        "count": 14
       },
       {
         "phrase": "data privacy",
@@ -493,6 +489,10 @@
       },
       {
         "phrase": "regulatory action",
+        "count": 7
+      },
+      {
+        "phrase": "retain",
         "count": 7
       }
     ]
@@ -765,7 +765,7 @@
       },
       {
         "phrase": "consumer hardware",
-        "count": 15
+        "count": 16
       },
       {
         "phrase": "operate system",
@@ -1030,6 +1030,10 @@
         "count": 12
       },
       {
+        "phrase": "share common",
+        "count": 12
+      },
+      {
         "phrase": "vehicle model",
         "count": 10
       },
@@ -1059,10 +1063,6 @@
       },
       {
         "phrase": "resale value",
-        "count": 9
-      },
-      {
-        "phrase": "share common",
         "count": 9
       },
       {

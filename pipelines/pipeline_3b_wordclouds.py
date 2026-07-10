@@ -59,10 +59,25 @@ BLACKLIST = {
 BLACKLIST_PREFIXES = {"product", "servic", "busi", "oper", "result"}
 
 
-def normalise_us(text):
+# Firm self-references are page furniture in 10-Ks ("Apple Inc. | Table of
+# Contents" headers repeat on every page) and pollute the n-grams
+# ("apple table"); strip them before the analysis.
+SELF_NAMES = {
+    "AAPL": ["apple"], "MSFT": ["microsoft"], "GOOGL": ["google", "alphabet"],
+    "AMZN": ["amazon"], "META": ["meta", "facebook"], "NVDA": ["nvidia"],
+    "TSLA": ["tesla"],
+}
+
+
+def normalise_us(text, ticker=None):
     text = re.sub(r"\bUnited States\b", "unitedstates", text, flags=re.IGNORECASE)
     text = re.sub(r"\bU\.?S\.?\b", "unitedstates", text, flags=re.IGNORECASE)
-    return re.sub(r"\bUS\b", "unitedstates", text)
+    text = re.sub(r"\bUS\b", "unitedstates", text)
+    if ticker:
+        words = [ticker] + SELF_NAMES.get(ticker, [])
+        text = re.sub(r"\b(" + "|".join(words) + r")\b", " ", text,
+                      flags=re.IGNORECASE)
+    return text
 
 
 def build_nlp():
@@ -203,7 +218,7 @@ def main():
                 print(f"{ticker} {year}: no / insufficient data, skipped")
                 continue
             t0 = time.perf_counter()
-            chunks = lemmatise(normalise_us(text))
+            chunks = lemmatise(normalise_us(text, ticker))
             counts = ngram_frequencies(chunks)
             freq = apply_blacklist(remove_redundant_unigrams(counts))
             freq = {k: v for k, v in freq.items() if v >= MIN_COUNT}

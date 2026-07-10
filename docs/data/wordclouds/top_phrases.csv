@@ -2,7 +2,6 @@ ticker,year,phrase,count
 AAPL,2015,third party,27
 AAPL,2015,intellectual property,13
 AAPL,2015,foreign currency,11
-AAPL,2015,apple table,10
 AAPL,2015,stock price,9
 AAPL,2015,materially adversely,9
 AAPL,2015,economic condition,8
@@ -19,6 +18,7 @@ AAPL,2015,reasonable term,6
 AAPL,2015,property right,6
 AAPL,2015,upgrade,6
 AAPL,2015,material adverse,5
+AAPL,2015,exchange rate,5
 AAPL,2025,materially adversely,44
 AAPL,2025,stock price,39
 AAPL,2025,third party,31
@@ -84,11 +84,9 @@ GOOGL,2015,capital stock,18
 GOOGL,2015,class capital,15
 GOOGL,2015,third party,13
 GOOGL,2015,class common,12
-GOOGL,2015,content alphabet,11
 GOOGL,2015,board director,11
 GOOGL,2015,property right,8
 GOOGL,2015,retain,8
-GOOGL,2015,google network,7
 GOOGL,2015,network member,7
 GOOGL,2015,repurchase program,7
 GOOGL,2015,anticipate benefit,6
@@ -99,10 +97,11 @@ GOOGL,2015,web spam,6
 GOOGL,2015,price class,6
 GOOGL,2015,stock repurchase,6
 GOOGL,2015,trade price,5
+GOOGL,2015,revenue generate,5
+GOOGL,2015,change practice,5
 GOOGL,2025,intellectual property,25
 GOOGL,2025,harm reputation,23
 GOOGL,2025,harm financial,20
-GOOGL,2025,content alphabet,14
 GOOGL,2025,data privacy,12
 GOOGL,2025,third party,12
 GOOGL,2025,data protection,12
@@ -119,6 +118,7 @@ GOOGL,2025,significant resource,7
 GOOGL,2025,property right,7
 GOOGL,2025,cyber attack,7
 GOOGL,2025,regulatory action,7
+GOOGL,2025,retain,7
 AMZN,2015,third party,23
 AMZN,2015,affect operate,10
 AMZN,2015,intellectual property,10
@@ -183,7 +183,7 @@ META,2025,third party,45
 META,2025,technical infrastructure,18
 META,2025,user base,18
 META,2025,user engagement,17
-META,2025,consumer hardware,15
+META,2025,consumer hardware,16
 META,2025,operate system,14
 META,2025,user account,14
 META,2025,data signal,13
@@ -247,6 +247,7 @@ TSLA,2015,ion cell,13
 TSLA,2015,battery pack,13
 TSLA,2015,new vehicle,12
 TSLA,2015,battery cell,12
+TSLA,2015,share common,12
 TSLA,2015,vehicle model,10
 TSLA,2015,material adverse,10
 TSLA,2015,long term,10
@@ -255,7 +256,6 @@ TSLA,2015,raw material,10
 TSLA,2015,price common,10
 TSLA,2015,limit experience,9
 TSLA,2015,resale value,9
-TSLA,2015,share common,9
 TSLA,2015,adverse effect,8
 TSLA,2015,liability claim,8
 TSLA,2015,increase cost,8
