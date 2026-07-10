@@ -1,0 +1,15 @@
+ticker,year,n_sentences,mean_score,label,share_negative,share_positive
+AAPL,2015,40,-0.825,negative,0.825,0.0
+AAPL,2025,40,-0.875,negative,0.9,0.025
+MSFT,2015,40,-0.775,negative,0.8,0.025
+MSFT,2025,40,-0.8,negative,0.8,0.0
+GOOGL,2015,40,-0.9,negative,0.9,0.0
+GOOGL,2025,40,-0.8,negative,0.825,0.025
+AMZN,2015,40,-0.9,negative,0.925,0.025
+AMZN,2025,40,-0.925,negative,0.925,0.0
+META,2015,40,-0.9,negative,0.9,0.0
+META,2025,40,-0.85,negative,0.85,0.0
+NVDA,2015,40,-0.925,negative,0.925,0.0
+NVDA,2025,40,-0.9,negative,0.9,0.0
+TSLA,2015,40,-0.65,negative,0.7,0.05
+TSLA,2025,40,-0.775,negative,0.775,0.0

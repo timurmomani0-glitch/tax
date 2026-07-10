@@ -52,12 +52,28 @@ async def _():
 
 
 @app.function
-def load_csv(name):
-    """Fetch one Layer-A artifact; None when the pipeline hasn't run yet."""
+def load_csv(name, required=()):
+    """Fetch one Layer-A artifact; None when unavailable or malformed.
+
+    Tries the raw-GitHub URL first (course Week 4 pattern), then a same-origin
+    copy under the deployed site's own data/ folder. Validates the expected
+    columns because a 404/rate-limit TEXT response still parses as a CSV — a
+    junk frame must degrade to the "pending" callout, not crash cells
+    downstream (learned from a live 'DataFrame has no attribute' incident).
+    """
+    bases = [RAW_BASE]
     try:
-        return pd.read_csv(RAW_BASE + name)
+        bases.append(str(mo.notebook_location() / "data") + "/")
     except Exception:
-        return None
+        pass
+    for base in bases:
+        try:
+            df = pd.read_csv(base + name)
+        except Exception:
+            continue
+        if all(col in df.columns for col in required):
+            return df
+    return None
 
 
 @app.function
@@ -67,14 +83,15 @@ def pending(msg):
 
 @app.cell
 def _():
-    df_fin = load_csv("financials.csv")
-    df_mag7 = load_csv("mag7_provided.csv")
-    df_reg = load_csv("site_regression.csv")
-    df_desc = load_csv("site_descriptive.csv")
-    df_corr = load_csv("site_correlation.csv")
-    df_panel = load_csv("site_panel_b.csv")
-    df_sent = load_csv("sentiment.csv")
-    df_phrases = load_csv("wordclouds/top_phrases.csv")
+    df_fin = load_csv("financials.csv", required=("Ticker", "Year", "Z_Score", "Zone"))
+    df_mag7 = load_csv("mag7_provided.csv", required=("instrument", "Year", "q", "Leverage"))
+    df_reg = load_csv("site_regression.csv", required=("group", "model", "term", "coef"))
+    df_desc = load_csv("site_descriptive.csv", required=("variable",))
+    df_corr = load_csv("site_correlation.csv", required=("pair",))
+    df_panel = load_csv("site_panel_b.csv", required=("sector", "q", "ESGscore"))
+    df_sent = load_csv("sentiment.csv", required=("ticker", "year", "mean_score"))
+    df_phrases = load_csv("wordclouds/top_phrases.csv",
+                          required=("ticker", "year", "phrase", "count"))
     return df_corr, df_desc, df_fin, df_mag7, df_panel, df_phrases, df_reg, df_sent
 
 
