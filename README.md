@@ -53,6 +53,8 @@ python tests/test_offline.py
 
 # 4. export + deploy (course Week 4 commands)
 marimo export html-wasm portfolio.py -o docs --sandbox --force
+# same-origin data fallback (the site tries raw GitHub first, then ./data/)
+mkdir -p docs/data && cp data/*.csv docs/data/ && cp -r data/wordclouds docs/data/
 git add -A && git commit -m "Update site" && git push
 # GitHub → Settings → Pages → Build from branch: main, folder /docs
 ```
