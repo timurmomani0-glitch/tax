@@ -155,10 +155,12 @@ def _(df_fin, df_mag7, firm_select, go, px, year_range):
 
     if df_fin is not None:
         _f = df_fin[df_fin.Ticker.isin(firm_select.value)]
+        _src = (df_fin["Source"].iloc[0] if "Source" in df_fin.columns
+                else "yfinance")
         _fig_z = px.bar(
             _f, x="Ticker", y="Z_Score", color="Zone", animation_frame="Year",
             color_discrete_map={"Safe": "green", "Grey": "grey", "Distress": "red"},
-            title="Altman Z-Score by firm and fiscal year (yfinance, Weeks 2–3)",
+            title=f"Altman Z-Score by firm and fiscal year<br><sup>Week 2 formula; data: {_src}</sup>",
             template="presentation", height=480,
         )
         _fig_z.add_hline(y=DISTRESS_Z, line_dash="dash", line_color="red",
@@ -293,11 +295,13 @@ def _(cloud_firm, df_phrases, df_sent, px):
             ])
             for _yr in (2015, 2025)
         ]
-        _tp = df_phrases[df_phrases.ticker == _t]
+        _tp = df_phrases[df_phrases.ticker == _t].copy()
+        _tp["year"] = _tp["year"].astype(str)  # categorical colors, not a gradient
         _fig_ph = px.bar(
             _tp.sort_values("count").groupby("year").tail(12),
             x="count", y="phrase", color="year", orientation="h",
             facet_col="year", title=f"Top risk phrases — {_t}",
+            color_discrete_map={"2015": "#c0392b", "2025": "#2471a3"},
             template="presentation", height=520,
         )
         _fig_ph.update_yaxes(matches=None, showticklabels=True)
@@ -308,10 +312,13 @@ def _(cloud_firm, df_phrases, df_sent, px):
             "`pipeline_3b_wordclouds.py` run (needs SEC EDGAR access)."))
 
     if df_sent is not None:
+        _ds = df_sent.copy()
+        _ds["year"] = _ds["year"].astype(str)  # categorical colors, not a gradient
         _fig_tone = px.bar(
-            df_sent, x="ticker", y="mean_score", color="year", barmode="group",
+            _ds, x="ticker", y="mean_score", color="year", barmode="group",
             title="LLM forward-looking tone per firm (−1 cautious … +1 optimistic)",
             labels={"mean_score": "Mean sentiment score"},
+            color_discrete_map={"2015": "#c0392b", "2025": "#2471a3"},
             template="presentation", height=430,
         )
         _fig_tone.add_hline(y=0.25, line_dash="dot", annotation_text="positive threshold")

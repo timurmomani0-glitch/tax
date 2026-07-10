@@ -85,30 +85,44 @@ def extract_risk_factors(html_bytes):
     Improvement over the course notebook's first-match approach: 10-K primary
     documents mention "Item 1A ... Risk Factors" first in the table of contents,
     so taking the FIRST match sweeps the whole "Item 1. Business" section into
-    the extract. Every start candidate is considered instead, and candidates that
-    contain ANOTHER "Item 1A ... Risk Factors" header inside them (the signature
-    of a TOC sweep) are rejected; among the genuine, properly-bounded sections
-    the longest wins (later "see Item 1A" cross-references are short).
+    the extract. Every start candidate is considered instead; candidates whose
+    opening chars are dense with "Item N" tokens (the TOC signature — a real
+    section start has at most a stray cross-reference) are dropped, and among
+    the rest the longest properly-bounded section wins.
     """
     soup = BeautifulSoup(html_bytes, "html.parser")
     text = soup.get_text(separator=" ", strip=True)
     text = re.sub(r"\s+", " ", text)
 
-    bounded, unbounded = [], []
+    # iXBRL page anchors sometimes split heading words into fragments that
+    # defeat the regexes ("I TEM 1A", "RIS K FACTORS" in real MSFT/TSLA 10-Ks) —
+    # rejoin them, preserving the original casing.
+    for word in ("ITEM", "RISK", "FACTORS"):
+        pattern = r"\b" + r"\s?".join(word) + r"\b"
+        text = re.sub(pattern, lambda m: m.group(0).replace(" ", ""), text,
+                      flags=re.IGNORECASE)
+
+    candidates = []  # (start_pos, text, has_end_marker)
     for m in START_PAT.finditer(text):
         tail = text[m.start():]
         end = END_PAT.search(tail, pos=200)  # skip the section header itself
         cand = tail[:end.start()].strip() if end else tail[:80_000].strip()
-        nested = START_PAT.search(cand, pos=200) is not None  # TOC sweep signature
-        (bounded if end else unbounded).append((cand, nested))
+        candidates.append((m.start(), cand, end is not None))
+    if not candidates:
+        return None
 
-    for pool in (bounded, unbounded):
-        clean = [c for c, nested in pool if not nested]
-        if clean:
-            return max(clean, key=len)
-        if pool:
-            return max((c for c, _ in pool), key=len)
-    return None
+    def looks_like_toc(cand):
+        return len(re.findall(r"Item\s+\d+[A-C]?[\.\s]", cand[:600], re.IGNORECASE)) >= 3
+
+    pool = [c for c in candidates if not looks_like_toc(c[1])] or candidates
+    # Cross-references earlier in the filing ("see Item 1A Risk Factors ...")
+    # sweep forward into the same section end, so among the long bounded
+    # candidates the real section heading is the one that starts LATEST.
+    big = [c for c in pool if c[2] and len(c[1]) >= 20_000]
+    if big:
+        return max(big, key=lambda c: c[0])[1]
+    bounded = [c[1] for c in pool if c[2]]
+    return max(bounded or [c[1] for c in pool], key=len)
 
 
 def fetch_item_1a(cik, filings, target_year):

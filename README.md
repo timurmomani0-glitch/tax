@@ -17,6 +17,7 @@ GitHub Pages. Live demo of Weeks 1–10 skills in one research story.
 | Pipeline | Weeks | What it does | Needs network? |
 |---|---|---|---|
 | `pipelines/pipeline_1_financials.py` | 2–3 | yfinance → Mag-7 firm-year panel (FY 2021–2025) → Altman Z-Score → `financials.csv` | Yahoo Finance |
+| `pipelines/pipeline_1b_financials_sec.py` | 2–3 + self-exp | Fallback when Yahoo rate-limits: SEC XBRL companyfacts (fundamentals) + course-provided market caps → Z-Scores FY 2021–2023 → `financials.csv` | sec.gov |
 | `pipelines/pipeline_2_edgar.py` | 7 | SEC EDGAR 10-K → Item 1A risk text (2015, 2025) → `risk_data.json` | sec.gov |
 | `pipelines/pipeline_3_llm.py` | 8–9 | Groq LLM few-shot tone + independent AI-judge → `sentiment.csv`, `judge_eval.csv` | Groq API |
 | `pipelines/pipeline_3b_wordclouds.py` | 10 | spaCy/nltk n-grams → 2015-vs-2025 word clouds → `data/wordclouds/` | no (after 2) |
