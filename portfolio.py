@@ -182,9 +182,13 @@ def _(df_fin, df_mag7, firm_select, go, px, year_range):
             template="presentation", height=480,
         )
         _fig_z.add_hline(y=DISTRESS_Z, line_dash="dash", line_color="red",
-                         annotation_text="Distress threshold (1.81)")
+                         annotation_text="Distress threshold (1.81)",
+                         annotation_position="bottom right",
+                         annotation_font_color="red")
         _fig_z.add_hline(y=SAFE_Z, line_dash="dash", line_color="green",
-                         annotation_text="Safe threshold (2.99)")
+                         annotation_text="Safe threshold (2.99)",
+                         annotation_position="top left",
+                         annotation_font_color="green")
         _parts += [firm_select, mo.ui.plotly(_fig_z)]
     else:
         _parts.append(pending(
@@ -237,16 +241,26 @@ def _(df_corr, df_desc, df_panel, df_reg, provider_note, px, sector_select):
                    mo.ui.table(df_desc, selection=None)]
     if df_corr is not None:
         _parts += [mo.md("### Pairwise correlations (stars: * p<0.1, ** p<0.05, *** p<0.01)"),
-                   mo.ui.table(df_corr, selection=None)]
+                   mo.ui.table(df_corr.fillna(""), selection=None)]
 
     if df_panel is not None:
-        _p = df_panel[df_panel.sector.isin(sector_select.value)]
+        _p = df_panel[df_panel.sector.isin(sector_select.value)].copy()
+        # Full sector names ("Professional, Scientific, and Technical Services")
+        # overflow the axis — plot with truncated labels, keep full names in
+        # the widget and hover.
+        _p["sector_label"] = _p["sector"].where(
+            _p["sector"].str.len() <= 16, _p["sector"].str.slice(0, 15) + "…")
         _fig_v = px.violin(
-            _p, x="sector", y="q", box=True, points=False,
+            _p, x="sector_label", y="q", box=True, points=False,
+            hover_name="sector",
             title="Tobin's q distribution by sector (violin + box, Week 3)",
-            template="presentation", height=450,
+            labels={"sector_label": "sector"},
+            template="presentation", height=500,
         )
         _fig_v.update_yaxes(range=[0, 10])  # zoom past extreme outliers
+        _fig_v.update_xaxes(tickangle=40, automargin=True,
+                            tickfont=dict(size=12))
+        _fig_v.update_layout(margin=dict(b=120))
         _fig_sc = px.scatter(
             _p.sample(min(len(_p), 2500), random_state=7),
             x="ESGscore", y="q", color="sector", opacity=0.55,
@@ -260,7 +274,7 @@ def _(df_corr, df_desc, df_panel, df_reg, provider_note, px, sector_select):
         _main = df_reg[df_reg.group == "main"].copy()
         _main["estimate"] = _main.coef.astype(str) + _main.stars + " (" + _main.se.astype(str) + ")"
         _wide = _main.pivot_table(index="term", columns="model", values="estimate",
-                                  aggfunc="first").reset_index()
+                                  aggfunc="first").reset_index().fillna("–")
         _meta = _main.drop_duplicates("model")[["model", "n", "r2", "industry_fe", "year_fe"]]
         _rob = df_reg[(df_reg.group == "robustness") & (df_reg.term == "ESGscore")][
             ["model", "coef", "se", "stars", "n", "r2"]]
@@ -324,7 +338,9 @@ def _(cloud_firm, df_phrases, df_sent, px):
             color_discrete_map={"2015": "#c0392b", "2025": "#2471a3"},
             template="presentation", height=520,
         )
-        _fig_ph.update_yaxes(matches=None, showticklabels=True)
+        _fig_ph.update_yaxes(matches=None, showticklabels=True,
+                             automargin=True, tickfont=dict(size=12))
+        _fig_ph.update_layout(margin=dict(l=210))
         _parts += [cloud_firm, mo.hstack(_imgs, justify="start"), mo.ui.plotly(_fig_ph)]
     else:
         _parts.append(pending(
