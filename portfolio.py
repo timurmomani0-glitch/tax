@@ -255,12 +255,14 @@ def _(df_corr, df_desc, df_panel, df_reg, provider_note, px, sector_select):
                   "(incl. winsorised 1/99%)"),
             mo.ui.table(_rob, selection=None),
             mo.md(
-                "**Cross-tool validation (Week 10 self-exploration):** "
-                "`analysis_R/WK10_ResultTables_AF1204.Rmd` re-estimates the identical "
-                "four models in **R** with stargazer and prints an agreement check — "
-                "sample construction and specification match, so the ESGscore "
-                "coefficients should agree to 4 decimal places. Output: "
-                "`data/regression_r.html`."),
+                "**Cross-tool validation (self-exploration) — confirmed:** the same "
+                "Model 4 re-estimated with an independent econometrics library, "
+                "**linearmodels `PanelOLS`** (fixed effects absorbed by the within "
+                "estimator instead of statsmodels' dummy variables), reproduces every "
+                "coefficient to 6 decimal places — ESGscore = **0.002650** in both. "
+                "See `notebooks/Regression_CrossCheck.ipynb` (Jupyter, runs in "
+                "Codespaces) and the stargazer-style table in "
+                "`data/regression_table.html`."),
             mo.md(
                 "**Interpretation.** Model 1's raw association is *negative*, but once "
                 "firm size, leverage and industry/year fixed effects are added "
@@ -362,10 +364,13 @@ def _():
             - **Polars for the merge (Week 10 self-exploration)** — the ESG file is
               245k rows × 2 providers; Polars' lazy engine joins and filters it in one
               optimised pass (~10× faster than pandas here) and writes Parquet.
-            - **R + stargazer cross-validation (self-exploration)** — the same four
-              models re-estimated in a second language (`analysis_R/`); matching
-              coefficients guard against silent specification errors in either
-              implementation.
+            - **Two-library cross-validation (self-exploration)** — Model 4
+              re-estimated with linearmodels' within estimator alongside
+              statsmodels' dummy-variable approach (`notebooks/
+              Regression_CrossCheck.ipynb`); the coefficients match to 6 decimals,
+              guarding against silent specification errors in either
+              implementation. The publication table uses the Python `stargazer`
+              package — the same table family as the course's Week 10 material.
             - **Two LLM families (self-exploration)** — `openai/gpt-oss-120b`
               classifies (course Week 9 settings: few-shot, temperature 0, JSON-only
               contract); `llama-3.3-70b-versatile` independently re-judges a sample,

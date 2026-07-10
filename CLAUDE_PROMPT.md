@@ -51,8 +51,9 @@ Repo `timurmomani0-glitch/tax`, all merged to main:
 - `pipelines/pipeline_3b_wordclouds.py` — 3-tier NLP engine (en_core_web_trf GPU /
   en_core_web_sm CPU / nltk fallback), course stopwords + blacklist +
   redundant-unigram rule, Reds(2015)/Blues(2025) clouds. NOT YET RUN.
-- `analysis_R/WK10_ResultTables_AF1204.Rmd` — same Models 1–4 in R, stargazer →
-  `data/regression_r.html` + printed Python↔R agreement check. NOT YET RUN.
+- `pipelines/pipeline_5_crosscheck.py` + `notebooks/Regression_CrossCheck.ipynb`
+  — Model 4 re-estimated with linearmodels PanelOLS; DONE: matches statsmodels to
+  6dp (ESGscore 0.002650), stargazer-style table in `data/regression_table.html`.
 - `notebooks_colab/wordclouds_gpu_colab.ipynb` — Colab T4 GPU rerun with timings.
 - `tests/test_offline.py` — 7/7 pass. `.env` is gitignored; `.env.example` template.
 - `README.md` — full reproduce steps + fork migration notes.
@@ -84,11 +85,10 @@ M-A **Run the data pipelines** (in this order, venv + `pip install -r requiremen
      `top_phrases.csv` + `engine_report.json` naming the engine used.
   Commit `data/` to main.
 
-M-B **R cross-validation**: render `analysis_R/WK10_ResultTables_AF1204.Rmd`
-  (RStudio or Codespace R). Accept: `data/regression_r.html` exists AND the printed
-  R Model-4 ESGscore coefficient matches Python's 0.0026 to 4 decimals. Then update
-  the site's ESG-tab wording from "should agree" to the confirmed fact, and embed
-  or link the R table.
+M-B **Two-library cross-validation**: DONE — `pipelines/pipeline_5_crosscheck.py`
+  (and the Jupyter notebook `notebooks/Regression_CrossCheck.ipynb`) confirm the
+  statsmodels and linearmodels coefficients match to 6 decimals; the site states
+  this as fact. Nothing left to do here besides showing the notebook in the video.
 
 M-C **GPU clouds** (optional but 90-level): run the Colab notebook on T4; commit the
   regenerated `data/wordclouds/` + note GPU vs CPU timing on the Method tab.
@@ -98,7 +98,7 @@ M-D **Re-export & verify locally**: 7/7 tests, then the export command above;
   widgets, no "pending" callouts left, tab selection survives widget clicks.
 
 M-E **Migrate to the official fork** (`BayesUG-AI/repo[2-]AF1204-[username]`):
-  copy `portfolio.py`, `pipelines/`, `data/`, `analysis_R/`, `notebooks_colab/`,
+  copy `portfolio.py`, `pipelines/`, `data/`, `notebooks/`, `notebooks_colab/`,
   `docs/`, `tests/`, `requirements.txt`, `.env.example`, `README.md`. Change the
   `RAW_BASE` line in `portfolio.py` to the fork's raw URL, re-export, push to
   **main**, enable Pages (main, /docs). Accept: the official
@@ -106,7 +106,7 @@ M-E **Migrate to the official fork** (`BayesUG-AI/repo[2-]AF1204-[username]`):
   view is what the video records.
 
 M-F **Video prep**: 3-minute script, one segment per tab: (1) question + method map,
-  (2) Z-Score dashboard interaction, (3) regression tables + R agreement line,
+  (2) Z-Score dashboard interaction, (3) regression tables + two-library agreement line,
   (4) 2015→2025 clouds + LLM tone + judge agreement, (5) limitations & tool choices
   "for potential employers". Face bubble on throughout; filename
   `[StudentEmailAddress][StudentIDNumber][yourGitHubUsername].mp4`.

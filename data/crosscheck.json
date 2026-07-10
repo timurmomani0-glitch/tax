@@ -1,0 +1,21 @@
+{
+  "n": 7895,
+  "terms": {
+    "ESGscore": {
+      "statsmodels": 0.00265,
+      "linearmodels": 0.00265,
+      "match_4dp": true
+    },
+    "Firm_Size": {
+      "statsmodels": -0.513536,
+      "linearmodels": -0.513536,
+      "match_4dp": true
+    },
+    "Leverage": {
+      "statsmodels": 0.0091,
+      "linearmodels": 0.0091,
+      "match_4dp": true
+    }
+  },
+  "all_match_4dp": true
+}

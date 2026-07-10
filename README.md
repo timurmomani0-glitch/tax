@@ -22,7 +22,7 @@ GitHub Pages. Live demo of Weeks 1–10 skills in one research story.
 | `pipelines/pipeline_3_llm.py` | 8–9 | Groq LLM few-shot tone + independent AI-judge → `sentiment.csv`, `judge_eval.csv` | Groq API |
 | `pipelines/pipeline_3b_wordclouds.py` | 10 | spaCy/nltk n-grams → 2015-vs-2025 word clouds → `data/wordclouds/` | no (after 2) |
 | `pipelines/pipeline_4_merge.py` | 6, 10 | **Polars** merge of provided ESG+accounting data → Tobin's q regressions (statsmodels Models 1–4 + robustness) → `site_*.csv`, `analysis.parquet` | no |
-| `analysis_R/WK10_ResultTables_AF1204.Rmd` | 10 | Same models in **R** → stargazer HTML → `regression_r.html` (cross-validation) | no (R needed) |
+| `pipelines/pipeline_5_crosscheck.py` + `notebooks/Regression_CrossCheck.ipynb` | 10 + self-exp | Model 4 re-estimated with **linearmodels** (within estimator) — coefficients match statsmodels to 6dp; Python **stargazer** table → `regression_table.html` | no |
 | `notebooks_colab/wordclouds_gpu_colab.ipynb` | 10 | GPU rerun of the clouds with `en_core_web_trf` + cupy, with timings | Colab |
 
 **Layer B (deployed):** `portfolio.py` reads ONLY the `data/` artifacts over raw
@@ -45,8 +45,8 @@ python pipelines/pipeline_1_financials.py   # Yahoo Finance → Z-Scores
 python pipelines/pipeline_2_edgar.py        # SEC EDGAR → Item 1A text
 python pipelines/pipeline_3_llm.py          # Groq → tone + judge
 python pipelines/pipeline_3b_wordclouds.py  # word clouds (GPU via the Colab notebook)
-# R cross-validation (RStudio / Codespace):
-#   rmarkdown::render("analysis_R/WK10_ResultTables_AF1204.Rmd")
+python pipelines/pipeline_5_crosscheck.py   # two-library regression cross-check
+# interactive version: open notebooks/Regression_CrossCheck.ipynb (Jupyter)
 
 # 3. tests
 python tests/test_offline.py
@@ -59,7 +59,7 @@ git add -A && git commit -m "Update site" && git push
 
 ### Deploying from a different repo (e.g. the course fork `timurmomani/tax`)
 
-Copy the project files (`portfolio.py`, `pipelines/`, `data/`, `analysis_R/`,
+Copy the project files (`portfolio.py`, `pipelines/`, `data/`, `notebooks/`,
 `docs/`, `requirements.txt`, `.env.example`, this README) into the fork. The site
 loads its data from the `RAW_BASE` URL at the top of `portfolio.py`, which points at
 this repo — that keeps working from any host while this repo is public. To make the
@@ -67,11 +67,13 @@ fork fully self-contained instead, change that one line to the fork's raw URL
 (e.g. `https://raw.githubusercontent.com/timurmomani/tax/main/data/`), re-run the
 export command above, and push.
 
-## Python ↔ R agreement check
+## Two-library agreement check — confirmed
 
-`pipeline_4_merge.py` (statsmodels) Model 4 on Provider B: **ESGscore = 0.0026\*\***
-(se 0.0012, N = 7,895, industry + year FE). The Rmd prints the R equivalent from an
-identical sample/specification — the coefficients should match to 4 decimals.
+`pipeline_4_merge.py` (statsmodels, dummy-variable FE) Model 4 on Provider B:
+**ESGscore = 0.0026\*\*** (se 0.0012, N = 7,895). `pipeline_5_crosscheck.py`
+re-estimates it with **linearmodels PanelOLS** (within estimator): every
+coefficient matches to 6 decimals (`data/crosscheck.json`). The interactive
+walk-through is `notebooks/Regression_CrossCheck.ipynb` (Jupyter, Codespaces-ready).
 
 ## Why these tools (short version — long version on the site's Method tab)
 
@@ -82,8 +84,9 @@ identical sample/specification — the coefficients should match to 4 decimals.
   hence FY 2021–2025.
 - **Polars** (self-exploration): 245k-row ESG panel × 2 providers joined lazily in
   one optimised pass, Parquet output.
-- **R + stargazer** (self-exploration): independent re-estimation guards against
-  silent specification bugs.
+- **linearmodels + Python stargazer** (self-exploration): independent
+  re-estimation (within estimator vs dummy variables) guards against silent
+  specification bugs — everything stays in Python, Codespaces-ready.
 - **Two LLM families** (self-exploration): `openai/gpt-oss-120b` classifies (course
   Week 9 settings), `llama-3.3-70b-versatile` re-judges a sample, primed with the
   Week 8 ambiguous-vocabulary list; agreement rate in `data/judge_eval.csv`.
@@ -91,5 +94,5 @@ identical sample/specification — the coefficients should match to 4 decimals.
 ## Video segments (3 min)
 
 Tab 1 Overview → Tab 2 Financial Health (widgets!) → Tab 3 ESG & Valuation
-(tables + R agreement) → Tab 4 Risk Language (clouds + tone) → Tab 5 Method &
+(tables + two-library agreement) → Tab 4 Risk Language (clouds + tone) → Tab 5 Method &
 Limitations. Each tab is one segment.
