@@ -143,7 +143,6 @@ def main():
 
     clean = panel.drop_nulls(["q", "ESGscore", "Firm_Size", "Leverage", "Year", "Industry"])
     clean.write_parquet(os.path.join(DATA, "analysis.parquet"))
-    clean.write_csv(os.path.join(DATA, "analysis.csv"))
     prof["rows_clean"] = clean.height
     with open(os.path.join(DATA, "profile.json"), "w") as f:
         json.dump(prof, f, indent=2)
@@ -238,7 +237,7 @@ def main():
     print(f"Panel: {prof['rows_raw']} raw -> {prof['rows_clean']} clean firm-year rows")
     print(f"Provider_B N={results['main']['Model 4']['n']}, "
           f"Model 4 ESGscore coef={m4['coef']}{m4['stars']} (se={m4['se']})")
-    print("Artifacts written to data/: analysis.parquet, analysis.csv, descriptive.json, "
+    print("Artifacts written to data/: analysis.parquet, descriptive.json, "
           "correlation.json, regression_py.json, profile.json")
 
 

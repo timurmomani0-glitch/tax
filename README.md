@@ -7,8 +7,8 @@ and market valuation?
 **Deliverable:** `portfolio.py` (marimo) → standalone WASM HTML site in `docs/` →
 GitHub Pages. Live demo of Weeks 1–10 skills in one research story.
 
-> This repo also contains earlier exam-study material (`EXAM_STUDY_SYSTEM.md`, root
-> CSVs) and the uploaded course materials (`course_materials/`, indexed there).
+> `course_materials/` holds only the course-provided data files the pipelines
+> read (ESG panel, few-shot examples, vocabulary list) — see its README.
 
 ## Architecture — two layers
 
