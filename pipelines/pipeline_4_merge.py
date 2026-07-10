@@ -21,7 +21,7 @@ Models (Provider_B, like the Rmd):
 Robustness: Provider_A, large firms (> median size), 2010-2019, winsorised 1/99%.
 
 Outputs (all under data/):
-    analysis.parquet / analysis.csv   — merged firm-year panel (both providers)
+    analysis.parquet                  — merged firm-year panel (both providers)
     descriptive.json                  — N/Mean/Median/SD/Min/Max per variable
     correlation.json                  — pairwise r with significance stars
     regression_py.json                — coefficients/SE/stars/N/R2 for all models
