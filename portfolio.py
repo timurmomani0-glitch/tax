@@ -155,10 +155,12 @@ def _(df_fin, df_mag7, firm_select, go, px, year_range):
 
     if df_fin is not None:
         _f = df_fin[df_fin.Ticker.isin(firm_select.value)]
+        _src = (df_fin["Source"].iloc[0] if "Source" in df_fin.columns
+                else "yfinance")
         _fig_z = px.bar(
             _f, x="Ticker", y="Z_Score", color="Zone", animation_frame="Year",
             color_discrete_map={"Safe": "green", "Grey": "grey", "Distress": "red"},
-            title="Altman Z-Score by firm and fiscal year (yfinance, Weeks 2–3)",
+            title=f"Altman Z-Score by firm and fiscal year<br><sup>Week 2 formula; data: {_src}</sup>",
             template="presentation", height=480,
         )
         _fig_z.add_hline(y=DISTRESS_Z, line_dash="dash", line_color="red",
