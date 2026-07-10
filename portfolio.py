@@ -40,12 +40,13 @@ with app.setup:
 @app.cell
 async def _():
     # WASM runtime needs plotly installed via micropip (course Week 4 pattern);
-    # in a local `marimo run/edit` session micropip does not exist, so guard it.
-    try:
-        import micropip
+    # locally (Codespaces) plotly comes from the venv, so only import micropip
+    # when actually running in the browser (pyodide reports sys.platform as
+    # "emscripten"), which also keeps the editor's import linter quiet.
+    import sys
+    if sys.platform == "emscripten":
+        import micropip  # type: ignore[import-not-found]  # noqa: F401
         await micropip.install("plotly")
-    except Exception:
-        pass  # outside WASM plotly comes from the local environment instead
     import plotly.express as px
     return (px,)
 
