@@ -129,7 +129,10 @@ def extract_json_from_response(text):
     return json.loads(text[start:end + 1])
 
 
-def call_with_retries(client, model, prompt, max_retries=3, retry_sleep=2.0):
+def call_with_retries(client, model, prompt, max_retries=4):
+    # Groq free-tier rate limits are token-based, so waits must grow long enough
+    # for the per-minute window to reset — quick fixed sleeps are not enough.
+    backoff = [3, 12, 35, 65]
     for attempt in range(1, max_retries + 1):
         try:
             completion = client.chat.completions.create(
@@ -140,31 +143,38 @@ def call_with_retries(client, model, prompt, max_retries=3, retry_sleep=2.0):
             return completion.choices[0].message.content
         except Exception as e:
             print(f"  Error calling Groq on attempt {attempt}: {e}")
-            time.sleep(retry_sleep)
+            time.sleep(backoff[min(attempt, len(backoff)) - 1])
     return None
 
 
-def classify_firm_year(client, sentences, few_shot):
-    """Sentence scores aligned to input order; all-neutral fallback (course pattern)."""
-    raw = call_with_retries(client, CLASSIFIER_MODEL,
-                            build_classifier_prompt(sentences, few_shot))
-    if raw is None:
-        return [0] * len(sentences), [""] * len(sentences)
+def classify_firm_year(client, sentences, few_shot, chunk_size=20):
+    """Sentence scores aligned to input order, classified in chunks to stay
+    inside Groq's token-per-minute limits. Returns (None, None) on total
+    failure — the caller marks the firm-year 'failed' rather than pretending
+    the tone was neutral (a lesson from the first run)."""
     mapping = {"positive": 1, "neutral": 0, "negative": -1}
-    try:
-        parsed = extract_json_from_response(raw)
-    except ValueError:
-        return [0] * len(sentences), [""] * len(sentences)
-    by_index, rat_by_index = {}, {}
-    for item in parsed.get("sentences", []):
+    scores, rationales = [], []
+    for start in range(0, len(sentences), chunk_size):
+        chunk = sentences[start:start + chunk_size]
+        raw = call_with_retries(client, CLASSIFIER_MODEL,
+                                build_classifier_prompt(chunk, few_shot))
+        if raw is None:
+            return None, None
         try:
-            i = int(item.get("index"))
-            by_index[i] = mapping.get(str(item.get("sentiment", "")).lower(), 0)
-            rat_by_index[i] = str(item.get("rationale", ""))
-        except Exception:
-            continue  # skip malformed items silently (course pattern)
-    scores = [by_index.get(i, 0) for i in range(1, len(sentences) + 1)]
-    rationales = [rat_by_index.get(i, "") for i in range(1, len(sentences) + 1)]
+            parsed = extract_json_from_response(raw)
+        except ValueError:
+            return None, None
+        by_index, rat_by_index = {}, {}
+        for item in parsed.get("sentences", []):
+            try:
+                i = int(item.get("index"))
+                by_index[i] = mapping.get(str(item.get("sentiment", "")).lower(), 0)
+                rat_by_index[i] = str(item.get("rationale", ""))
+            except Exception:
+                continue  # skip malformed items silently (course pattern)
+        scores += [by_index.get(i, 0) for i in range(1, len(chunk) + 1)]
+        rationales += [rat_by_index.get(i, "") for i in range(1, len(chunk) + 1)]
+        time.sleep(2)  # spacing between chunks, same rate-limit budget
     return scores, rationales
 
 
@@ -204,6 +214,10 @@ def main():
                 print(f"{ticker} {year}: no forward-looking sentences found")
                 continue
             scores, rationales = classify_firm_year(client, sentences, few_shot)
+            if scores is None:
+                print(f"{ticker} {year}: classification FAILED after retries — "
+                      "not recorded (rerun to fill in)")
+                continue
             mean_score = sum(scores) / float(len(scores))
             sentiment[ticker][year] = {
                 "n_sentences": len(sentences),

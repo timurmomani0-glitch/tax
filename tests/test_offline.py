@@ -72,6 +72,38 @@ def test_edgar_extraction_skips_table_of_contents():
         "extractor swept the Business section (TOC first-match bug)"
 
 
+def test_edgar_extraction_handles_split_letter_headings():
+    # Real MSFT/TSLA 10-Ks flatten with page anchors splitting heading words:
+    # "I TEM 1A", "RIS K FACTORS" — extraction must still find the section.
+    body = "Competition is intense. Cyberattacks could harm results. " * 40
+    html = ("<html><body>"
+            "<p>Item 1. Business 3</p><p>Item 1A. Risk Factors 16</p>"
+            "<p>Item 1B. Unresolved Staff Comments 30</p><p>Item 2. Properties 32</p>"
+            "<p>Item 1. Business</p><p>" + "We sell software. " * 60 + "</p>"
+            "<p>PART I Item 1A I TEM 1A. RIS K FACTORS</p>"
+            "<p>" + body + "</p>"
+            "<p>I TEM 1B. Unresolved Staff Comments</p>"
+            "</body></html>").encode()
+    text = extract_risk_factors(html)
+    assert text is not None and "Cyberattacks could harm" in text
+    assert "We sell software" not in text
+
+
+def test_edgar_extraction_prefers_real_heading_over_cross_reference():
+    # A cross-reference inside "Item 1. Business" sweeps into the real section
+    # and comes out LONGER — the real heading (latest start) must win.
+    risk = "Demand may decline. Regulation could adversely affect us. " * 400
+    html = ("<html><body>"
+            "<p>see Item 1A Risk Factors of this Annual Report for details.</p>"
+            "<p>" + "Our people are critical to our success. " * 200 + "</p>"
+            "<p>ITEM 1A. RISK FACTORS</p><p>" + risk + "</p>"
+            "<p>Item 1B. Unresolved Staff Comments</p>"
+            "</body></html>").encode()
+    text = extract_risk_factors(html)
+    assert text is not None and text.upper().startswith("ITEM 1A. RISK FACTORS")
+    assert "Our people are critical" not in text
+
+
 def test_llm_json_parsing_with_fences_and_gaps():
     raw = """```json
     {"sentences": [{"index": 1, "sentiment": "positive", "rationale": "growth"},
