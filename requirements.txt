@@ -18,6 +18,9 @@ matplotlib
 marimo>=0.19.10
 plotly>=6.0
 altair>=5.0
+linearmodels
+stargazer
+jupyter
 # Optional (Week 10 GPU track — see notebooks_colab/wordclouds_gpu_colab.ipynb):
 # spacy, spacy-transformers, spacy-curated-transformers>=0.3.1, cupy-cuda12x,
 # en_core_web_trf wheel from explosion/spacy-models releases
