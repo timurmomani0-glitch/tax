@@ -21,7 +21,7 @@ Models (Provider_B, like the Rmd):
 Robustness: Provider_A, large firms (> median size), 2010-2019, winsorised 1/99%.
 
 Outputs (all under data/):
-    analysis.parquet / analysis.csv   — merged firm-year panel (both providers)
+    analysis.parquet                  — merged firm-year panel (both providers)
     descriptive.json                  — N/Mean/Median/SD/Min/Max per variable
     correlation.json                  — pairwise r with significance stars
     regression_py.json                — coefficients/SE/stars/N/R2 for all models
@@ -143,7 +143,6 @@ def main():
 
     clean = panel.drop_nulls(["q", "ESGscore", "Firm_Size", "Leverage", "Year", "Industry"])
     clean.write_parquet(os.path.join(DATA, "analysis.parquet"))
-    clean.write_csv(os.path.join(DATA, "analysis.csv"))
     prof["rows_clean"] = clean.height
     with open(os.path.join(DATA, "profile.json"), "w") as f:
         json.dump(prof, f, indent=2)
@@ -238,7 +237,7 @@ def main():
     print(f"Panel: {prof['rows_raw']} raw -> {prof['rows_clean']} clean firm-year rows")
     print(f"Provider_B N={results['main']['Model 4']['n']}, "
           f"Model 4 ESGscore coef={m4['coef']}{m4['stars']} (se={m4['se']})")
-    print("Artifacts written to data/: analysis.parquet, analysis.csv, descriptive.json, "
+    print("Artifacts written to data/: analysis.parquet, descriptive.json, "
           "correlation.json, regression_py.json, profile.json")
 
 

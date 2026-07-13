@@ -15,3 +15,6 @@ __marimo__/
 
 # OS
 .DS_Store
+
+# marimo export helper (regenerated on every export, not part of the site)
+docs/CLAUDE.md
