@@ -23,7 +23,6 @@ GitHub Pages. Live demo of Weeks 1–10 skills in one research story.
 | `pipelines/pipeline_3b_wordclouds.py` | 10 | spaCy/nltk n-grams → 2015-vs-2025 word clouds → `data/wordclouds/` | no (after 2) |
 | `pipelines/pipeline_4_merge.py` | 6, 10 | **Polars** merge of provided ESG+accounting data → Tobin's q regressions (statsmodels Models 1–4 + robustness) → `site_*.csv`, `analysis.parquet` | no |
 | `pipelines/pipeline_5_crosscheck.py` + `notebooks/Regression_CrossCheck.ipynb` | 10 + self-exp | Model 4 re-estimated with **linearmodels** (within estimator) — coefficients match statsmodels to 6dp; Python **stargazer** table → `regression_table.html` | no |
-| `notebooks_colab/wordclouds_gpu_colab.ipynb` | 10 | GPU rerun of the clouds with `en_core_web_trf` + cupy, with timings | Colab |
 
 **Layer B (deployed):** `portfolio.py` reads ONLY the `data/` artifacts over raw
 GitHub URLs (the Week 4 course pattern — bundled local files don't survive GitHub
@@ -44,7 +43,7 @@ python pipelines/pipeline_4_merge.py        # provided data → regressions (no 
 python pipelines/pipeline_1_financials.py   # Yahoo Finance → Z-Scores
 python pipelines/pipeline_2_edgar.py        # SEC EDGAR → Item 1A text
 python pipelines/pipeline_3_llm.py          # Groq → tone + judge
-python pipelines/pipeline_3b_wordclouds.py  # word clouds (GPU via the Colab notebook)
+python pipelines/pipeline_3b_wordclouds.py  # word clouds
 python pipelines/pipeline_5_crosscheck.py   # two-library regression cross-check
 # interactive version: open notebooks/Regression_CrossCheck.ipynb (Jupyter)
 

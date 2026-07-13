@@ -236,7 +236,7 @@ def _(headline, kpi_row):
             | Valuation & ESG — Tobin's q regressions | 6 | **Polars** + statsmodels, cross-validated with **linearmodels** | `site_regression.csv`, `regression_table.html` |
             | Disclosed risk & tone — 10-K Item 1A text | 7 | SEC EDGAR official API | `risk_data.json` |
             | LLM sentiment + independent AI judge | 8–9 | Groq (`openai/gpt-oss-120b` + `llama-3.3-70b-versatile`) | `sentiment.csv`, `judge_eval.csv` |
-            | Risk-language shift 2015 → 2025 | 10 | spaCy/nltk n-grams (GPU notebook for Colab) | word clouds |
+            | Risk-language shift 2015 → 2025 | 10 | spaCy/nltk n-grams | word clouds |
 
             ### Headline finding
 
@@ -535,9 +535,9 @@ def _():
             _engine = _json_mod.loads(_engine_txt).get("engine", "")
         except Exception:
             _engine = ""
-    _engine_line = (f"- **NLP engine actually used:** {_engine} — the Colab "
-                    "notebook (`notebooks_colab/`) reruns the clouds on a T4 GPU "
-                    "with `en_core_web_trf`.\n" if _engine else "")
+    _engine_line = (f"- **NLP engine actually used:** {_engine} — the pipeline "
+                    "auto-upgrades to a spaCy transformer model when one is "
+                    "available.\n" if _engine else "")
     tab_method = mo.vstack([
         mo.md(
             f"""
