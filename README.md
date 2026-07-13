@@ -1,99 +1,105 @@
-# AF1204 Data-Literacy Portfolio — Do firms disclose what their numbers say?
+# Do firms disclose what their numbers say?
 
-**Research question:** for large US listed firms (the "Magnificent 7"), does the risk
-language and tone a company discloses in its filings align with its financial health
-and market valuation?
+**Live site:** https://timurmomani0-glitch.github.io/tax/
 
-**Deliverable:** `portfolio.py` (marimo) → standalone WASM HTML site in `docs/` →
-GitHub Pages. Live demo of Weeks 1–10 skills in one research story.
+A data-literacy portfolio built for AF1204 at Bayes Business School. It asks one
+question about the "Magnificent 7" (Apple, Microsoft, Alphabet, Amazon, Meta,
+Nvidia, Tesla): does the risk language a company publishes in its 10-K filings
+line up with its financial health and market valuation?
 
-> `course_materials/` holds only the course-provided data files the pipelines
-> read (ESG panel, few-shot examples, vocabulary list) — see its README.
+The deliverable is a single marimo notebook, `portfolio.py`, exported to a
+standalone WebAssembly site and served on GitHub Pages. Everything on the page —
+Altman Z-Scores, ESG–valuation regressions, LLM tone scores, word clouds — comes
+from data pipelines in this repository. Nothing is hand-typed.
 
-## Architecture — two layers
+## What the analysis found
 
-**Layer A (offline pipelines → `data/` artifacts; never deployed):**
+Firms with higher ESG scores trade at a modest valuation premium once industry
+and year effects are controlled for (ESG coefficient on Tobin's q: 0.0026,
+significant at 5%, N = 7,895 firm-years). The result survives winsorisation but
+flips sign under an alternative ESG provider and fades in sub-samples, so the
+site presents it with those caveats rather than as a headline truth.
 
-| Pipeline | Weeks | What it does | Needs network? |
-|---|---|---|---|
-| `pipelines/pipeline_1_financials.py` | 2–3 | yfinance → Mag-7 firm-year panel (FY 2021–2025) → Altman Z-Score → `financials.csv` | Yahoo Finance |
-| `pipelines/pipeline_1b_financials_sec.py` | 2–3 + self-exp | Fallback when Yahoo rate-limits: SEC XBRL companyfacts (fundamentals) + course-provided market caps → Z-Scores FY 2021–2023 → `financials.csv` | sec.gov |
-| `pipelines/pipeline_2_edgar.py` | 7 | SEC EDGAR 10-K → Item 1A risk text (2015, 2025) → `risk_data.json` | sec.gov |
-| `pipelines/pipeline_3_llm.py` | 8–9 | Groq LLM few-shot tone + independent AI-judge → `sentiment.csv`, `judge_eval.csv` | Groq API |
-| `pipelines/pipeline_3b_wordclouds.py` | 10 | spaCy/nltk n-grams → 2015-vs-2025 word clouds → `data/wordclouds/` | no (after 2) |
-| `pipelines/pipeline_4_merge.py` | 6, 10 | **Polars** merge of provided ESG+accounting data → Tobin's q regressions (statsmodels Models 1–4 + robustness) → `site_*.csv`, `analysis.parquet` | no |
-| `pipelines/pipeline_5_crosscheck.py` + `notebooks/Regression_CrossCheck.ipynb` | 10 + self-exp | Model 4 re-estimated with **linearmodels** (within estimator) — coefficients match statsmodels to 6dp; Python **stargazer** table → `regression_table.html` | no |
+On the text side, the forward-looking sentences inside Item 1A risk sections are
+overwhelmingly cautious for every firm in both 2015 and 2025 — which is itself
+the finding: risk-factor language is structurally negative, and what changes
+over the decade is *what* firms worry about (visible in the word clouds), not
+how optimistically they phrase it. An independent second model re-judged a
+sample of the classifications and agreed 78.6% of the time.
 
-**Layer B (deployed):** `portfolio.py` reads ONLY the `data/` artifacts over raw
-GitHub URLs (the Week 4 course pattern — bundled local files don't survive GitHub
-Pages compression). Static WASM: no server, no secrets, no live API calls.
+## How it is built
 
-## Reproduce from a clean clone
+The project has two layers.
+
+**The pipelines** (in `pipelines/`) do all the data work offline and write small
+artifacts to `data/`:
+
+| Script | What it does |
+|---|---|
+| `pipeline_1_financials.py` | Altman Z-Scores from Yahoo Finance statements (yfinance) |
+| `pipeline_1b_financials_sec.py` | Same panel from the SEC's XBRL API + course market caps — used when Yahoo rate-limits cloud IPs |
+| `pipeline_2_edgar.py` | Downloads 10-K "Item 1A Risk Factors" text from SEC EDGAR for 2015 and 2025 |
+| `pipeline_3_llm.py` | Classifies forward-looking sentences with a Groq-hosted LLM, then has a second model family re-judge a sample |
+| `pipeline_3b_wordclouds.py` | Lemmatised n-gram word clouds of the risk text, 2015 vs 2025 |
+| `pipeline_4_merge.py` | Polars merge of the provided ESG and accounting panels; Tobin's q regressions in statsmodels |
+| `pipeline_5_crosscheck.py` | Re-estimates the main regression with linearmodels; coefficients match statsmodels to six decimals |
+
+**The site** (`portfolio.py`) never calls an API and holds no secrets. It reads
+the committed artifacts over raw GitHub URLs, with a same-origin fallback under
+`docs/data/`, and renders five tabs of interactive Plotly charts and tables.
+`notebooks/Regression_CrossCheck.ipynb` is a Jupyter walk-through of the
+two-library regression check.
+
+`course_materials/` contains only the course-provided data files the pipelines
+read (the ESG panel, few-shot sentiment examples, and a vocabulary list).
+
+## Running it yourself
 
 ```bash
-# 0. secrets (never committed — .env is gitignored)
-cp .env.example .env        # then fill in GROQ_API_KEY and SEC_USER_AGENT
-
-# 1. environment
+cp .env.example .env          # add your own GROQ_API_KEY and SEC_USER_AGENT
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 
-# 2. offline layer (order matters)
-python pipelines/pipeline_4_merge.py        # provided data → regressions (no network)
-python pipelines/pipeline_1_financials.py   # Yahoo Finance → Z-Scores
-python pipelines/pipeline_2_edgar.py        # SEC EDGAR → Item 1A text
-python pipelines/pipeline_3_llm.py          # Groq → tone + judge
-python pipelines/pipeline_3b_wordclouds.py  # word clouds
-python pipelines/pipeline_5_crosscheck.py   # two-library regression cross-check
-# interactive version: open notebooks/Regression_CrossCheck.ipynb (Jupyter)
+python pipelines/pipeline_4_merge.py         # regressions (no network needed)
+python pipelines/pipeline_5_crosscheck.py    # two-library cross-check
+python pipelines/pipeline_2_edgar.py         # EDGAR risk text
+python pipelines/pipeline_3_llm.py           # LLM tone + judge
+python pipelines/pipeline_3b_wordclouds.py   # word clouds
+python pipelines/pipeline_1_financials.py    # Z-Scores (or pipeline_1b via SEC)
 
-# 3. tests
-python tests/test_offline.py
-
-# 4. export + deploy (course Week 4 commands)
-marimo export html-wasm portfolio.py -o docs --sandbox --force
-# same-origin data fallback (the site tries raw GitHub first, then ./data/)
-mkdir -p docs/data && cp data/*.csv docs/data/ && cp -r data/wordclouds docs/data/
-git add -A && git commit -m "Update site" && git push
-# GitHub → Settings → Pages → Build from branch: main, folder /docs
+python tests/test_offline.py                 # offline test suite
 ```
 
-### Deploying from a different repo (e.g. the course fork `timurmomani/tax`)
+To preview the site locally, run `marimo run portfolio.py`. To rebuild the
+deployed version:
 
-Copy the project files (`portfolio.py`, `pipelines/`, `data/`, `notebooks/`,
-`docs/`, `requirements.txt`, `.env.example`, this README) into the fork. The site
-loads its data from the `RAW_BASE` URL at the top of `portfolio.py`, which points at
-this repo — that keeps working from any host while this repo is public. To make the
-fork fully self-contained instead, change that one line to the fork's raw URL
-(e.g. `https://raw.githubusercontent.com/timurmomani/tax/main/data/`), re-run the
-export command above, and push.
+```bash
+marimo export html-wasm portfolio.py -o docs --sandbox --force
+mkdir -p docs/data && cp data/*.csv docs/data/ && cp -r data/wordclouds docs/data/
+```
 
-## Two-library agreement check — confirmed
+Pushing to `main` triggers the GitHub Actions workflow in
+`.github/workflows/deploy-pages.yml`, which publishes `docs/` to GitHub Pages
+(the repository's Pages source is set to "GitHub Actions").
 
-`pipeline_4_merge.py` (statsmodels, dummy-variable FE) Model 4 on Provider B:
-**ESGscore = 0.0026\*\*** (se 0.0012, N = 7,895). `pipeline_5_crosscheck.py`
-re-estimates it with **linearmodels PanelOLS** (within estimator): every
-coefficient matches to 6 decimals (`data/crosscheck.json`). The interactive
-walk-through is `notebooks/Regression_CrossCheck.ipynb` (Jupyter, Codespaces-ready).
+## Deploying from another repository
 
-## Why these tools (short version — long version on the site's Method tab)
+The site fetches data from the `RAW_BASE` URL defined at the top of
+`portfolio.py`. If you copy the project into a different repository, either
+leave that URL pointing here (it works from any host while this repo is public)
+or change the one line to your own repo's raw URL and re-run the export.
 
-- **EDGAR over scraping**: official API, no bot detection; requires only a
-  self-identifying `User-Agent` and politeness delays (0.5 s).
-- **yfinance for Z-Scores**: the provided accounting file lacks current
-  assets/liabilities and retained earnings; free Yahoo data covers ~4–5 years,
-  hence FY 2021–2025.
-- **Polars** (self-exploration): 245k-row ESG panel × 2 providers joined lazily in
-  one optimised pass, Parquet output.
-- **linearmodels + Python stargazer** (self-exploration): independent
-  re-estimation (within estimator vs dummy variables) guards against silent
-  specification bugs — everything stays in Python, Codespaces-ready.
-- **Two LLM families** (self-exploration): `openai/gpt-oss-120b` classifies (course
-  Week 9 settings), `llama-3.3-70b-versatile` re-judges a sample, primed with the
-  Week 8 ambiguous-vocabulary list; agreement rate in `data/judge_eval.csv`.
+## Design notes
 
-## Video segments (3 min)
+- EDGAR was chosen over scraping corporate sites: it is an official API with no
+  bot detection, asking only for a self-identifying User-Agent and polite
+  request spacing.
+- Polars handles the 245k-row ESG merge; the regression sample is 8,849
+  firm-years after cleaning.
+- Two LLM families are used deliberately — one classifies, a different one
+  audits — so the accuracy check is not a model grading its own homework.
+- The regression is estimated twice, in statsmodels and linearmodels, as a
+  guard against silent specification mistakes.
 
-Tab 1 Overview → Tab 2 Financial Health (widgets!) → Tab 3 ESG & Valuation
-(tables + two-library agreement) → Tab 4 Risk Language (clouds + tone) → Tab 5 Method &
-Limitations. Each tab is one segment.
+Limitations (Z-Score calibration, ESG provider disagreement, LLM accuracy,
+causality) are discussed on the site's Method & Limitations tab.
