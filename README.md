@@ -1,6 +1,7 @@
 # Do firms disclose what their numbers say?
 
-**Live site:** https://timurmomani0-glitch.github.io/tax/
+**Live site:** https://bayesug-ai.github.io/Timur-Momani-CV2-AF1204/
+(development mirror: https://timurmomani0-glitch.github.io/tax/)
 
 A data-literacy portfolio built for AF1204 at Bayes Business School. It asks one
 question about the "Magnificent 7" (Apple, Microsoft, Alphabet, Amazon, Meta,
